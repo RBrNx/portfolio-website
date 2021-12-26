@@ -18,6 +18,7 @@
   "dependencies": {
     "@fontsource/fjalla-one": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
+    "@n8tb1t/use-scroll-position": "^2.0.3",
     "@types/styled-components": "^5.1.19",
     "babel-plugin-styled-components": "^2.0.2",
     "eslint-config-airbnb": "^19.0.2",
