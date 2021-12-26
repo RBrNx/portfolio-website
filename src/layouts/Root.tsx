@@ -24,6 +24,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     background-color: ${props => props.theme.background};
+    font-family: "Roboto", sans-serif;
   }
 `;
 
