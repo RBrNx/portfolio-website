@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../features/navigation/Navbar';
+import Footer from '../library/components/Footer';
 import HeroHeader from '../library/components/HeroHeader';
 
 interface DefaultLayoutProps {
@@ -14,8 +15,9 @@ const DefaultLayout = ({ children, heroImage, heroTitle, heroSubtitle }: Default
     <Navbar />
     <main>
       <HeroHeader image={heroImage} title={heroTitle} subtitle={heroSubtitle} />
-      <section id='main-content'>{children}</section>
+      <div id='main-content'>{children}</div>
     </main>
+    <Footer />
   </div>
 );
 
