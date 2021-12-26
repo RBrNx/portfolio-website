@@ -17,6 +17,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
 );
 
 const GlobalStyles = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
     background-color: ${props => props.theme.background};
