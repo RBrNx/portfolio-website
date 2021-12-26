@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import HeroHeaderScrollButton from './HeroHeaderScrollButton';
 
 interface HeroHeaderProps {
   image: string;
@@ -17,6 +18,7 @@ const HeroHeader = ({ image, title: Title, subtitle: Subtitle }: HeroHeaderProps
       {Title && <Title />}
       {Subtitle && <Subtitle />}
     </TextContainer>
+    <HeroHeaderScrollButton />
   </BackgroundImage>
 );
 
@@ -26,6 +28,9 @@ const BackgroundImage = styled.section<BackgroundImageProps>`
   position: relative;
   transition: background 1s ease-in;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &:before {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7));

@@ -14,7 +14,7 @@ const DefaultLayout = ({ children, heroImage, heroTitle, heroSubtitle }: Default
     <Navbar />
     <main>
       <HeroHeader image={heroImage} title={heroTitle} subtitle={heroSubtitle} />
-      {children}
+      <section id='main-content'>{children}</section>
     </main>
   </div>
 );
