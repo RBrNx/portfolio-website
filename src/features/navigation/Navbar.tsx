@@ -1,30 +1,60 @@
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { Link } from 'gatsby';
-import React from 'react';
+import { rgba } from 'polished';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Navbar = () => (
-  <Nav>
-    <NavLink to='/' activeClassName='active'>
-      Portfolio
-    </NavLink>
-    <NavLink to='/about' activeClassName='active'>
-      About
-    </NavLink>
-    <NavLink to='/blog' activeClassName='active'>
-      Blog
-    </NavLink>
-    <NavLink to='/CV' activeClassName='active'>
-      CV
-    </NavLink>
-  </Nav>
-);
+interface NavProps {
+  backgroundOpacity: number;
+  translateY: number;
+}
 
-const Nav = styled.nav`
+const Navbar = () => {
+  const [backgroundOpacity, setOpacity] = useState(0);
+  const [translateY, setTranslateY] = useState(0);
+
+  useScrollPosition(
+    ({ currPos, prevPos }) => {
+      if (currPos.y < prevPos.y && translateY > -85) {
+        setTranslateY(-85);
+        setOpacity(1);
+      } else if (currPos.y > prevPos.y && translateY < 0) {
+        setTranslateY(0);
+      }
+
+      if (currPos.y === 0) setOpacity(0);
+    },
+    [translateY],
+  );
+
+  return (
+    <Nav backgroundOpacity={backgroundOpacity} translateY={translateY}>
+      <NavLink to='/' activeClassName='active'>
+        Portfolio
+      </NavLink>
+      <NavLink to='/about' activeClassName='active'>
+        About
+      </NavLink>
+      <NavLink to='/blog' activeClassName='active'>
+        Blog
+      </NavLink>
+      <NavLink to='/CV' activeClassName='active'>
+        CV
+      </NavLink>
+    </Nav>
+  );
+};
+
+const Nav = styled.nav.attrs<NavProps>(props => ({
+  style: {
+    background: rgba(props.theme.background, props.backgroundOpacity),
+    transform: `translateY(${props.translateY}%)`,
+  },
+}))<NavProps>`
   position: fixed;
   z-index: 99999;
   width: 100vw;
   font-family: 'Fjalla One', sans-serif;
-  background: ${props => props.theme.background};
   transition: transform 200ms linear, background 200ms linear;
   transition-delay: 0ms;
   display: flex;
