@@ -28,14 +28,16 @@ const HeroHeaderScrollButton = ({ scrollToElement = '#main-content' }) => {
   );
 };
 
-const ButtonContainer = styled.div<ButtonContainerProps>`
+const ButtonContainer = styled.div.attrs<ButtonContainerProps>(props => ({
+  style: {
+    opacity: props.opacity,
+  },
+}))<ButtonContainerProps>`
   position: absolute;
   width: 24px;
   height: 60px;
   bottom: 5%;
   cursor: pointer;
-  transition: opacity 1s;
-  opacity: ${props => props.opacity};
 `;
 
 const Chevron = styled.div`
