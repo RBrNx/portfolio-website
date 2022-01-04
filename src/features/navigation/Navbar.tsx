@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <Nav backgroundOpacity={backgroundOpacity} translateY={translateY}>
-      <NavLink to='/' activeClassName='active'>
+      <NavLink to='/portfolio' activeClassName='active'>
         Portfolio
       </NavLink>
       <NavLink to='/about' activeClassName='active'>
