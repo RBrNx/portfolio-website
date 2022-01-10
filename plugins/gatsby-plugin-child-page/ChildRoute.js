@@ -41,7 +41,7 @@ const ChildRoute = props => {
     const oldProps = currentProps;
     const oldPageWasModal = !!currentProps?.location.state?.modal;
 
-    console.log('Pathname changed', { oldProps, oldPageWasModal, props });
+    // console.log('Pathname changed', { oldProps, oldPageWasModal, props });
 
     setCurrentProps(props);
     setPrevProps(oldProps);
@@ -59,7 +59,7 @@ const ChildRoute = props => {
   // the page is the previous path if this is a modal, otherwise it's the current path
   const pageElement = buildPageElement(isModal, prevProps, props);
   const modalElement = buildModalElement(isModal, null, pageResources, props);
-  console.log('render', { prevProps, isModal, modalElement });
+  // console.log('render', { prevProps, isModal, modalElement });
 
   return (
     <>
