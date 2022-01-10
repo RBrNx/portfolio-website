@@ -4,20 +4,22 @@ import styled from 'styled-components';
 import Button from '../../library/components/Button';
 
 interface PortfolioCardProps {
+  id: string;
   title: string;
   description: string;
   headerImageUrl: string;
+  onClick: React.MouseEventHandler;
 }
 
-const PortfolioCardFront = ({ title, description, headerImageUrl }: PortfolioCardProps) => (
-  <Container>
+const PortfolioCardFront = ({ id, title, description, headerImageUrl, onClick }: PortfolioCardProps) => (
+  <Container id={id}>
     <Header>
       <img src={headerImageUrl} alt='Portfolio item' />
     </Header>
     <Body>
       <Title>{title}</Title>
       <Description>{description}</Description>
-      <Button onClick={() => {}}>Learn More</Button>
+      <Button onClick={onClick}>Learn More</Button>
     </Body>
   </Container>
 );
