@@ -2,6 +2,7 @@
 import { lighten } from 'polished';
 import React, { TransitionEvent, useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import { useScrollLock } from '../context/ScrollLock';
 import CloseButton from './CloseButton';
 
 interface ModalProps {
@@ -21,9 +22,14 @@ interface ModalOverlayProps {
 const CardModal = ({ onClose, onFlipFinish, show, cardFront: CardFront, cardBack: CardBack, style }: ModalProps) => {
   const flipperRef = useRef<HTMLDivElement>(null);
   const [isFlipped, setIsFlipped] = useState(false);
+  const { lockScroll, unlockScroll } = useScrollLock();
 
   useEffect(() => {
-    setTimeout(() => setIsFlipped(show), 0);
+    setTimeout(() => {
+      setIsFlipped(show);
+
+      show ? lockScroll() : unlockScroll();
+    }, 0);
   }, [show]);
 
   const handleTransformTransitionEnd = (e: TransitionEvent) => {

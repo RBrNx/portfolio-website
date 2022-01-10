@@ -1,8 +1,9 @@
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { Link } from 'gatsby';
 import { rgba } from 'polished';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useScrollLock } from '../../library/context/ScrollLock';
 
 interface NavProps {
   backgroundOpacity: number;
@@ -12,6 +13,7 @@ interface NavProps {
 const Navbar = () => {
   const [backgroundOpacity, setOpacity] = useState(0);
   const [translateY, setTranslateY] = useState(0);
+  const { isScrollLocked } = useScrollLock();
 
   useScrollPosition(
     ({ currPos, prevPos }) => {
@@ -26,6 +28,10 @@ const Navbar = () => {
     },
     [translateY],
   );
+
+  useEffect(() => {
+    if (isScrollLocked) setTranslateY(-85);
+  }, [isScrollLocked]);
 
   return (
     <Nav backgroundOpacity={backgroundOpacity} translateY={translateY}>

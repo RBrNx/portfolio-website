@@ -1,5 +1,6 @@
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ScrollLockProvider } from '../library/context/ScrollLock';
 
 // Define what props.theme will look like
 const theme = {
@@ -10,10 +11,12 @@ const theme = {
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <ThemeProvider theme={theme}>
-    {children}
-    <GlobalStyles />
-  </ThemeProvider>
+  <ScrollLockProvider>
+    <ThemeProvider theme={theme}>
+      {children}
+      <GlobalStyles />
+    </ThemeProvider>
+  </ScrollLockProvider>
 );
 
 const GlobalStyles = createGlobalStyle`
