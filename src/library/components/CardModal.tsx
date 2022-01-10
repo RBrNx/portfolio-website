@@ -14,8 +14,8 @@ interface ModalProps {
 }
 
 interface ModalOverlayProps {
-  show: boolean;
-  flip?: boolean;
+  show?: boolean;
+  isFlipped?: boolean;
 }
 
 const CardModal = ({ onClose, onFlipFinish, show, cardFront: CardFront, cardBack: CardBack, style }: ModalProps) => {
@@ -40,8 +40,8 @@ const CardModal = ({ onClose, onFlipFinish, show, cardFront: CardFront, cardBack
   return (
     <>
       <ModalOverlay show={show} onClick={onClose} />
-      <ModalContainer show={show} style={style}>
-        <Flipper ref={flipperRef} show={show} flip={isFlipped} onTransitionEnd={handleTransformTransitionEnd}>
+      <ModalContainer isFlipped={isFlipped} style={style}>
+        <Flipper ref={flipperRef} show={show} isFlipped={isFlipped} onTransitionEnd={handleTransformTransitionEnd}>
           <CardFrontContainer>{CardFront && <CardFront />}</CardFrontContainer>
           <CardBackContainer>
             <CloseButton onClick={onClose} />
@@ -73,12 +73,12 @@ const ModalContainer = styled.div<ModalOverlayProps>`
   perspective: 1000px;
   z-index: 100;
   ${props =>
-    props.show &&
+    props.isFlipped &&
     css`
-      height: 100%;
-      width: 100%;
-      left: 0;
-      top: 0;
+      height: 100% !important;
+      width: 100% !important;
+      left: 0 !important;
+      top: 0 !important;
     `}
 `;
 
@@ -92,7 +92,7 @@ const Flipper = styled.div<ModalOverlayProps>`
   transform: rotate(0deg);
 
   ${props =>
-    props.flip &&
+    props.isFlipped &&
     css`
       transform: rotateY(180deg);
     `}
