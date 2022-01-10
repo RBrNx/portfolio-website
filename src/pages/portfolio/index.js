@@ -1,15 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { graphql } from 'gatsby';
-import DefaultLayout from '../layouts/Default';
-import HomeHeaderImage from '../images/hero/home-header.jpeg';
-import PortfolioTitle from '../features/portfolio/Title';
-import PortfolioSubtitle from '../features/portfolio/Subtitle';
-import Section from '../library/components/Section';
-import PortfolioCardFront from '../features/portfolio/PortfolioCardFront';
+import { graphql, navigate } from 'gatsby';
+import DefaultLayout from '../../layouts/Default';
+import HomeHeaderImage from '../../images/hero/home-header.jpeg';
+import PortfolioTitle from '../../features/portfolio/Title';
+import PortfolioSubtitle from '../../features/portfolio/Subtitle';
+import Section from '../../library/components/Section';
+import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
 
 const IndexPage = ({ data }) => {
   const { nodes: portfolioItems } = data.allGraphCmsPortfolioItem;
+
+  const onClick = ({ portfolioPath, id }) => {
+    const origPortfolioItem = document.getElementById(id);
+    const viewportOffset = origPortfolioItem.getBoundingClientRect();
+
+    const initialModalStyle = {
+      height: `${origPortfolioItem.clientHeight}px`,
+      width: `${origPortfolioItem.clientWidth}px`,
+      left: `${viewportOffset.left}px`,
+      top: `${viewportOffset.top}px`,
+    };
+
+    navigate(portfolioPath, { state: { modal: true, initialModalStyle } });
+  };
 
   return (
     <DefaultLayout heroImage={HomeHeaderImage} heroTitle={PortfolioTitle} heroSubtitle={PortfolioSubtitle}>
@@ -18,9 +32,11 @@ const IndexPage = ({ data }) => {
           {portfolioItems?.map(item => (
             <PortfolioCardFront
               key={item.id}
+              id={item.id}
               title={item.title}
               description={item.description}
               headerImageUrl={item.carouselImages[0].url}
+              onClick={() => onClick(item)}
             />
           ))}
         </GridContainer>
@@ -57,6 +73,7 @@ export const query = graphql`
           link
           type
         }
+        portfolioPath: gatsbyPath(filePath: "/portfolio/{graphCmsPortfolioItem.title}")
       }
     }
   }
