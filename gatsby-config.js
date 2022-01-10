@@ -11,6 +11,9 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-fontawesome-css',
     {
+      resolve: require.resolve(`./plugins/gatsby-plugin-child-page`),
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
