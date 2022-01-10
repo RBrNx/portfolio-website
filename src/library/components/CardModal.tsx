@@ -1,11 +1,12 @@
 /* eslint-disable react/button-has-type */
 import { lighten } from 'polished';
-import React, { useEffect, useState } from 'react';
+import React, { TransitionEvent, useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import CloseButton from './CloseButton';
 
 interface ModalProps {
   handleClose: React.MouseEventHandler;
+  onFlipFinish: Function;
   show: boolean;
   cardFront?: () => JSX.Element;
   cardBack: () => JSX.Element;
@@ -17,18 +18,37 @@ interface ModalOverlayProps {
   flip?: boolean;
 }
 
-const CardModal = ({ handleClose, show, cardFront: CardFront, cardBack: CardBack, style }: ModalProps) => {
+const CardModal = ({
+  handleClose,
+  onFlipFinish,
+  show,
+  cardFront: CardFront,
+  cardBack: CardBack,
+  style,
+}: ModalProps) => {
+  const flipperRef = useRef<HTMLDivElement>(null);
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setIsFlipped(show), 0);
   }, [show]);
 
+  const handleTransformTransitionEnd = (e: TransitionEvent) => {
+    if (!flipperRef.current) return;
+
+    const { className } = flipperRef.current;
+    const target = e.target as HTMLDivElement;
+
+    if (e.propertyName === 'transform' && target.className === className) {
+      onFlipFinish({ isFlipped });
+    }
+  };
+
   return (
     <>
       <ModalOverlay show={show} onClick={handleClose} />
       <ModalContainer show={show} style={style}>
-        <Flipper show={show} flip={isFlipped}>
+        <Flipper ref={flipperRef} show={show} flip={isFlipped} onTransitionEnd={handleTransformTransitionEnd}>
           <CardFrontContainer>{CardFront && <CardFront />}</CardFrontContainer>
           <CardBackContainer>
             <CloseButton onClick={handleClose} />
