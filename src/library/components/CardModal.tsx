@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import CloseButton from './CloseButton';
 
 interface ModalProps {
-  handleClose: React.MouseEventHandler;
+  onClose: React.MouseEventHandler;
   onFlipFinish: Function;
   show: boolean;
   cardFront?: () => JSX.Element;
@@ -18,14 +18,7 @@ interface ModalOverlayProps {
   flip?: boolean;
 }
 
-const CardModal = ({
-  handleClose,
-  onFlipFinish,
-  show,
-  cardFront: CardFront,
-  cardBack: CardBack,
-  style,
-}: ModalProps) => {
+const CardModal = ({ onClose, onFlipFinish, show, cardFront: CardFront, cardBack: CardBack, style }: ModalProps) => {
   const flipperRef = useRef<HTMLDivElement>(null);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -46,12 +39,12 @@ const CardModal = ({
 
   return (
     <>
-      <ModalOverlay show={show} onClick={handleClose} />
+      <ModalOverlay show={show} onClick={onClose} />
       <ModalContainer show={show} style={style}>
         <Flipper ref={flipperRef} show={show} flip={isFlipped} onTransitionEnd={handleTransformTransitionEnd}>
           <CardFrontContainer>{CardFront && <CardFront />}</CardFrontContainer>
           <CardBackContainer>
-            <CloseButton onClick={handleClose} />
+            <CloseButton onClick={onClose} />
             <ScrollContainer>
               <div>{CardBack && <CardBack />}</div>
             </ScrollContainer>
