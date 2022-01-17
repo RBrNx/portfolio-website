@@ -59,7 +59,9 @@ export const query = graphql`
       id
       title
       description
-      aboutProject
+      about {
+        html
+      }
       carouselImages {
         id
         url
@@ -68,7 +70,7 @@ export const query = graphql`
       links {
         id
         title
-        link
+        url
         type
       }
     }

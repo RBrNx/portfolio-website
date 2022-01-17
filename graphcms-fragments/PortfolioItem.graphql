@@ -6,8 +6,15 @@ fragment PortfolioItem on PortfolioItem {
   publishedAt
   title
   description
-  aboutProject
   techSheet
+  about {
+    ... on RichText {
+      raw
+      html
+      markdown
+      text
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename

@@ -5,7 +5,7 @@ fragment Link on Link {
   updatedAt
   publishedAt
   title
-  link
+  url
   type
   createdBy {
     ... on User {
