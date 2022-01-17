@@ -2,12 +2,16 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { graphql, navigate } from 'gatsby';
 import CardModal from '../../library/components/CardModal';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
+import PortfolioCardBack from '../../features/portfolio/PortfolioCardBack';
+import { wrapAnchors } from '../../library/utils/DOMParser';
 
 const PortfolioItem = ({ data, location }) => {
   const { initialModalStyle } = location.state;
-  const { id, title, description, carouselImages } = data.graphCmsPortfolioItem;
+  const { id, title, description, carouselImages, about, techSheet, links } = data.graphCmsPortfolioItem;
   const origPortfolioItem = useRef(document.getElementById(id));
   const [modalVisible, setModalVisible] = useState(false);
+
+  const aboutHTML = wrapAnchors(about.html);
 
   useEffect(() => {
     setModalVisible(true);
@@ -31,10 +35,14 @@ const PortfolioItem = ({ data, location }) => {
 
   const CardBackComponent = useCallback(
     () => (
-      <div>
-        <p>Title: {title}</p>
-        <p>Description: {description}</p>
-      </div>
+      <PortfolioCardBack
+        title={title}
+        description={description}
+        carouselImages={carouselImages}
+        aboutProject={aboutHTML}
+        techSheet={techSheet}
+        links={links}
+      />
     ),
     [],
   );
