@@ -61,17 +61,9 @@ export const query = graphql`
         id
         title
         description
-        aboutProject
         carouselImages {
           id
           url
-        }
-        techSheet
-        links {
-          id
-          title
-          link
-          type
         }
         portfolioPath: gatsbyPath(filePath: "/portfolio/{graphCmsPortfolioItem.title}")
       }
