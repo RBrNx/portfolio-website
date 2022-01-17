@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faStackOverflow, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import Button from './Button';
 
 const Footer = () => (
@@ -12,7 +11,7 @@ const Footer = () => (
     <StyledButton onClick={() => window.open('mailto:conor.watson94@gmail.com', '_blank')}>Contact Me</StyledButton>
     <SocialContainer>
       <a href='https://github.com/RBrNx' target='_blank' aria-label='Vist my Github' rel='noreferrer'>
-        <FontAwesomeIcon icon={faGithub} />
+        <FontAwesomeIcon icon={['fab', 'github']} />
       </a>
       <a
         href='https://stackoverflow.com/users/4237014/conor-watson'
@@ -20,7 +19,7 @@ const Footer = () => (
         aria-label='Vist my StackOverflow'
         rel='noreferrer'
       >
-        <FontAwesomeIcon icon={faStackOverflow} />
+        <FontAwesomeIcon icon={['fab', 'stack-overflow']} />
       </a>
       <a
         href='https://www.linkedin.com/in/conor-watson-8847665b/'
@@ -28,7 +27,7 @@ const Footer = () => (
         aria-label='Vist my LinkedIn'
         rel='noreferrer'
       >
-        <FontAwesomeIcon icon={faLinkedin} />
+        <FontAwesomeIcon icon={['fab', 'linkedin']} />
       </a>
     </SocialContainer>
     <Blurb>
