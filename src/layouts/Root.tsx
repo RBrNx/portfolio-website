@@ -10,6 +10,7 @@ import {
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import 'overlayscrollbars/css/OverlayScrollbars.css';
 import { ScrollLockProvider } from '../library/context/ScrollLock';
 
 library.add(faGithub, faStackOverflow, faLinkedin, faNpm, faGooglePlay, faAppStoreIos, faExternalLinkAlt);

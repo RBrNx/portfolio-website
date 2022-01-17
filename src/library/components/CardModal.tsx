@@ -1,4 +1,5 @@
 /* eslint-disable react/button-has-type */
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { lighten } from 'polished';
 import React, { TransitionEvent, useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
@@ -51,9 +52,7 @@ const CardModal = ({ onClose, onFlipFinish, show, cardFront: CardFront, cardBack
           <CardFrontContainer>{CardFront && <CardFront />}</CardFrontContainer>
           <CardBackContainer>
             <CloseButton onClick={onClose} />
-            <ScrollContainer>
-              <div>{CardBack && <CardBack />}</div>
-            </ScrollContainer>
+            <ScrollContainer>{CardBack && <CardBack />}</ScrollContainer>
           </CardBackContainer>
         </Flipper>
       </ModalContainer>
@@ -120,7 +119,7 @@ const CardBackContainer = styled(CardFrontContainer)`
   border-radius: 5px;
 `;
 
-const ScrollContainer = styled.div`
+const ScrollContainer = styled(OverlayScrollbarsComponent)`
   height: 100%;
 `;
 
