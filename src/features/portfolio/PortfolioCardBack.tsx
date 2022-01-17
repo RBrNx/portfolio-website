@@ -17,6 +17,7 @@ interface PortfolioCardBackProps {
   aboutProject: string;
   carouselImages: any[];
   links: any[];
+  onImageClicked: Function;
 }
 
 const PortfolioCardBack = ({
@@ -26,6 +27,7 @@ const PortfolioCardBack = ({
   carouselImages,
   aboutProject,
   links,
+  onImageClicked,
 }: PortfolioCardBackProps) => (
   <Container>
     <Title>{title}</Title>
@@ -38,9 +40,9 @@ const PortfolioCardBack = ({
         pagination={{ clickable: true }}
         navigation
       >
-        {carouselImages.map(image => (
+        {carouselImages.map((image, index) => (
           <SwiperSlide className='tester' key={image.id}>
-            <CarouselImage src={image.url} alt='Carousel' />
+            <CarouselImage src={image.url} alt='Carousel' onClick={() => onImageClicked(index)} />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { graphql, navigate } from 'gatsby';
+import Lightbox from 'react-image-lightbox';
 import CardModal from '../../library/components/CardModal';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
 import PortfolioCardBack from '../../features/portfolio/PortfolioCardBack';
@@ -10,6 +11,10 @@ const PortfolioItem = ({ data, location }) => {
   const { id, title, description, carouselImages, about, techSheet, links } = data.graphCmsPortfolioItem;
   const origPortfolioItem = useRef(document.getElementById(id));
   const [modalVisible, setModalVisible] = useState(false);
+  const [lightboxVisible, setLightboxVisible] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const nextPhotoIndex = (photoIndex + 1) % carouselImages.length;
+  const prevPhotoIndex = (photoIndex + carouselImages.length - 1) % carouselImages.length;
 
   const aboutHTML = wrapAnchors(about.html);
 
@@ -42,20 +47,36 @@ const PortfolioItem = ({ data, location }) => {
         aboutProject={aboutHTML}
         techSheet={techSheet}
         links={links}
+        onImageClicked={index => {
+          setPhotoIndex(index);
+          setLightboxVisible(true);
+        }}
       />
     ),
     [],
   );
 
   return (
-    <CardModal
-      show={modalVisible}
-      onClose={onModalClose}
-      onFlipFinish={onFlipFinish}
-      cardFront={CardFrontComponent}
-      cardBack={CardBackComponent}
-      style={initialModalStyle}
-    />
+    <>
+      <CardModal
+        show={modalVisible}
+        onClose={onModalClose}
+        onFlipFinish={onFlipFinish}
+        cardFront={CardFrontComponent}
+        cardBack={CardBackComponent}
+        style={initialModalStyle}
+      />
+      {lightboxVisible && (
+        <Lightbox
+          mainSrc={carouselImages[photoIndex].url}
+          nextSrc={carouselImages[nextPhotoIndex].url}
+          prevSrc={carouselImages[prevPhotoIndex].url}
+          onCloseRequest={() => setLightboxVisible(false)}
+          onMovePrevRequest={() => setPhotoIndex(prevPhotoIndex)}
+          onMoveNextRequest={() => setPhotoIndex(nextPhotoIndex)}
+        />
+      )}
+    </>
   );
 };
 
