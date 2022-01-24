@@ -11,7 +11,11 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-fontawesome-css',
     {
-      resolve: require.resolve(`./plugins/gatsby-plugin-child-page`),
+      resolve: require.resolve(`./plugins/gatsby-plugin-child-router`),
+      options: {
+        pageRendererPath: `${__dirname}/src/library/components/PageRenderer.tsx`,
+        routes: ['/portfolio/:slug/'],
+      },
     },
     {
       resolve: 'gatsby-source-filesystem',
