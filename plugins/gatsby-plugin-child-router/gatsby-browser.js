@@ -6,9 +6,9 @@
 // You can delete this file if you're not using it
 
 import React from 'react';
-import ChildRoute from './ChildRoute';
+import ChildRouter from './ChildRouter';
 
-const wrapPageElement = ({ props }) => React.createElement(ChildRoute, props);
+const wrapPageElement = ({ props }, { routes }) => React.createElement(ChildRouter, { ...props, routes });
 
 const shouldUpdateScroll = () => false;
 
