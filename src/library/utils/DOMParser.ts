@@ -1,6 +1,7 @@
-const parser = new DOMParser();
-
 const wrapAnchors = (html: string) => {
+  if (typeof window === 'undefined') return null;
+
+  const parser = new DOMParser();
   const htmlDoc = parser.parseFromString(html, 'text/html');
   const anchors = htmlDoc.getElementsByTagName('a');
 

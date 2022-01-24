@@ -9,7 +9,7 @@ import Section from '../../library/components/Section';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
 
 const IndexPage = ({ data }) => {
-  const { nodes: portfolioItems } = data.allGraphCmsPortfolioItem;
+  const { nodes: portfolioItems } = data?.allGraphCmsPortfolioItem || {};
 
   const onClick = ({ portfolioPath, id }) => {
     const origPortfolioItem = document.getElementById(id);

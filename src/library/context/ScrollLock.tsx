@@ -1,9 +1,14 @@
 import React, { createContext, useCallback, useContext, useLayoutEffect, useRef, useState } from 'react';
 
-const isiOS =
-  ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) ||
-  // iPad on iOS 13 detection
-  (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+const isiOSDevice = () => {
+  if (typeof window === 'undefined') return false;
+
+  return (
+    ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) ||
+    // iPad on iOS 13 detection
+    (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+  );
+};
 
 const ScrollLockContext = createContext({ isScrollLocked: false, lockScroll: () => {}, unlockScroll: () => {} });
 
@@ -14,6 +19,7 @@ const ScrollLockProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const useProviderScrollLock = () => {
+  const isiOS = isiOSDevice();
   const scrollOffset = useRef(0);
   const [isScrollLocked, setIsScrollLocked] = useState(false);
 

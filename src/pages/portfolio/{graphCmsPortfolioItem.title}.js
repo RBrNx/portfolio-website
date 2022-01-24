@@ -9,7 +9,7 @@ import { wrapAnchors } from '../../library/utils/DOMParser';
 const PortfolioItem = ({ data, location }) => {
   const { initialModalStyle } = location.state;
   const { id, title, description, carouselImages, about, techSheet, links } = data.graphCmsPortfolioItem;
-  const origPortfolioItem = useRef(document.getElementById(id));
+  const origPortfolioItem = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -20,7 +20,8 @@ const PortfolioItem = ({ data, location }) => {
 
   useEffect(() => {
     setModalVisible(true);
-    origPortfolioItem.current.style.opacity = 0;
+    origPortfolioItem.current = document.getElementById(id);
+    if (origPortfolioItem.current) origPortfolioItem.current.style.opacity = 0;
   }, []);
 
   const onModalClose = () => {
@@ -29,7 +30,7 @@ const PortfolioItem = ({ data, location }) => {
 
   const onFlipFinish = ({ isFlipped }) => {
     if (!isFlipped) {
-      origPortfolioItem.current.style.opacity = 1;
+      if (origPortfolioItem.current) origPortfolioItem.current.style.opacity = 1;
       navigate('/portfolio');
     }
   };
