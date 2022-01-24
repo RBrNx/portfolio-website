@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+import React from 'react';
 // eslint-disable-next-line no-undef
 const PageRenderer = require(__COMPONENT_BASE_PATH__).default;
 
