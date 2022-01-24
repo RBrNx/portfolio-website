@@ -84,6 +84,7 @@ const ModalContainer = styled.div<ModalOverlayProps>`
       width: 100% !important;
       left: 0 !important;
       top: 0 !important;
+      transform: translate(0) !important;
     `}
 `;
 

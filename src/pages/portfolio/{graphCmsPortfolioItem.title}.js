@@ -7,7 +7,15 @@ import PortfolioCardBack from '../../features/portfolio/PortfolioCardBack';
 import { wrapAnchors } from '../../library/utils/DOMParser';
 
 const PortfolioItem = ({ data, location }) => {
-  const { initialModalStyle } = location.state;
+  const { initialModalStyle } = location?.state || {
+    initialModalStyle: {
+      height: '0px',
+      width: '0px',
+      left: '25%',
+      top: '100%',
+      transform: 'translateX(-50%)',
+    },
+  };
   const { id, title, description, carouselImages, about, techSheet, links } = data.graphCmsPortfolioItem;
   const origPortfolioItem = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
