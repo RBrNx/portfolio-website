@@ -1,25 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import { graphql, navigate } from 'gatsby';
+import { graphql, navigate, PageProps } from 'gatsby';
 import DefaultLayout from '../../layouts/Default';
 import HomeHeaderImage from '../../images/hero/home-header.jpeg';
 import PortfolioTitle from '../../features/portfolio/Title';
 import PortfolioSubtitle from '../../features/portfolio/Subtitle';
 import Section from '../../library/components/Section';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
+import { AllPortfolioItemsQuery, GraphCms_PortfolioItem } from '../../library/graphqlTypes';
 
-const IndexPage = ({ data }) => {
+interface PortfolioItem extends GraphCms_PortfolioItem {
+  portfolioPath: string;
+}
+
+const IndexPage = ({ data }: PageProps<AllPortfolioItemsQuery>) => {
   const { nodes: portfolioItems } = data?.allGraphCmsPortfolioItem || {};
 
-  const onClick = ({ portfolioPath, id }) => {
+  const onClick = ({ portfolioPath, id }: PortfolioItem) => {
     const origPortfolioItem = document.getElementById(id);
-    const viewportOffset = origPortfolioItem.getBoundingClientRect();
+    const viewportOffset = origPortfolioItem?.getBoundingClientRect();
 
     const initialModalStyle = {
-      height: `${origPortfolioItem.clientHeight}px`,
-      width: `${origPortfolioItem.clientWidth}px`,
-      left: `${viewportOffset.left}px`,
-      top: `${viewportOffset.top}px`,
+      height: `${origPortfolioItem?.clientHeight}px`,
+      width: `${origPortfolioItem?.clientWidth}px`,
+      left: `${viewportOffset?.left}px`,
+      top: `${viewportOffset?.top}px`,
     };
 
     navigate(portfolioPath, { state: { modal: true, initialModalStyle } });
@@ -36,7 +41,7 @@ const IndexPage = ({ data }) => {
               title={item.title}
               description={item.description}
               headerImageUrl={item.carouselImages[0].url}
-              onClick={() => onClick(item)}
+              onClick={() => onClick(item as PortfolioItem)}
             />
           ))}
         </GridContainer>
@@ -55,7 +60,7 @@ const GridContainer = styled.div`
 `;
 
 export const query = graphql`
-  query {
+  query AllPortfolioItems {
     allGraphCmsPortfolioItem {
       nodes {
         id

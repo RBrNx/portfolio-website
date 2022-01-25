@@ -1,12 +1,22 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { graphql, navigate } from 'gatsby';
+import { graphql, navigate, PageProps } from 'gatsby';
 import Lightbox from 'react-image-lightbox';
 import CardModal from '../../library/components/CardModal';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
 import PortfolioCardBack from '../../features/portfolio/PortfolioCardBack';
 import { wrapAnchors } from '../../library/utils/DOMParser';
+import { PortfolioItemQuery } from '../../library/graphqlTypes';
 
-const PortfolioItem = ({ data, location }) => {
+interface NavigationState {
+  initialModalStyle: {
+    height: string;
+    width: string;
+    left: string;
+    top: string;
+  };
+}
+
+const PortfolioItem = ({ data, location }: PageProps<PortfolioItemQuery, null, NavigationState>) => {
   const { initialModalStyle } = location?.state || {
     initialModalStyle: {
       height: '0px',
@@ -16,34 +26,42 @@ const PortfolioItem = ({ data, location }) => {
       transform: 'translateX(-50%)',
     },
   };
-  const { id, title, description, carouselImages, about, techSheet, links } = data.graphCmsPortfolioItem;
-  const origPortfolioItem = useRef(null);
+  const {
+    id = '',
+    title = '',
+    description = '',
+    carouselImages = [],
+    about = { html: '' },
+    techSheet = [],
+    links = [],
+  } = data.graphCmsPortfolioItem || {};
+  const origPortfolioItem = useRef<HTMLElement | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const nextPhotoIndex = (photoIndex + 1) % carouselImages.length;
   const prevPhotoIndex = (photoIndex + carouselImages.length - 1) % carouselImages.length;
 
-  const aboutHTML = wrapAnchors(about.html);
+  const aboutHTML = wrapAnchors(about!.html);
 
   useEffect(() => {
     setModalVisible(true);
     origPortfolioItem.current = document.getElementById(id);
-    if (origPortfolioItem.current) origPortfolioItem.current.style.opacity = 0;
+    if (origPortfolioItem.current) origPortfolioItem.current.style.opacity = '0';
   }, []);
 
   const onModalClose = () => {
     setModalVisible(false);
   };
 
-  const onFlipFinish = ({ isFlipped }) => {
+  const onFlipFinish = ({ isFlipped }: { isFlipped: Boolean }) => {
     if (!isFlipped) {
-      if (origPortfolioItem.current) origPortfolioItem.current.style.opacity = 1;
+      if (origPortfolioItem.current) origPortfolioItem.current.style.opacity = '1';
       navigate('/portfolio');
     }
   };
   const CardFrontComponent = useCallback(
-    () => <PortfolioCardFront title={title} description={description} headerImageUrl={carouselImages[0].url} />,
+    () => <PortfolioCardFront id={id} title={title} description={description} headerImageUrl={carouselImages[0].url} />,
     [],
   );
 
@@ -56,7 +74,7 @@ const PortfolioItem = ({ data, location }) => {
         aboutProject={aboutHTML}
         techSheet={techSheet}
         links={links}
-        onImageClicked={index => {
+        onImageClicked={(index: number) => {
           setPhotoIndex(index);
           setLightboxVisible(true);
         }}
@@ -92,7 +110,7 @@ const PortfolioItem = ({ data, location }) => {
 export default PortfolioItem;
 
 export const query = graphql`
-  query ($id: String!) {
+  query PortfolioItem($id: String!) {
     graphCmsPortfolioItem(id: { eq: $id }) {
       id
       title

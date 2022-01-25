@@ -8,10 +8,10 @@ interface PortfolioCardProps {
   title: string;
   description: string;
   headerImageUrl: string;
-  onClick: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler;
 }
 
-const PortfolioCardFront = ({ id, title, description, headerImageUrl, onClick }: PortfolioCardProps) => (
+const PortfolioCardFront = ({ id, title, description, headerImageUrl, onClick = () => {} }: PortfolioCardProps) => (
   <Container id={id}>
     <Header>
       <img src={headerImageUrl} alt='Portfolio item' />

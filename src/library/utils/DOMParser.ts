@@ -1,5 +1,5 @@
 const wrapAnchors = (html: string) => {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined') return '';
 
   const parser = new DOMParser();
   const htmlDoc = parser.parseFromString(html, 'text/html');
