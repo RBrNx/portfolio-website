@@ -11,14 +11,14 @@ interface DefaultLayoutProps {
 }
 
 const DefaultLayout = ({ children, heroImage, heroTitle, heroSubtitle }: DefaultLayoutProps) => (
-  <div>
+  <>
     <Navbar />
     <main>
       <HeroHeader image={heroImage} title={heroTitle} subtitle={heroSubtitle} />
       <div id='main-content'>{children}</div>
     </main>
     <Footer />
-  </div>
+  </>
 );
 
 export default DefaultLayout;

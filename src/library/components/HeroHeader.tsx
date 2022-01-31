@@ -3,22 +3,33 @@ import styled from 'styled-components';
 import HeroHeaderScrollButton from './HeroHeaderScrollButton';
 
 interface HeroHeaderProps {
-  image: string;
+  className?: string;
+  image?: string;
   title?: () => JSX.Element;
-  subtitle: () => JSX.Element;
+  subtitle?: () => JSX.Element;
+  children?: React.ReactNode;
+  hideHeaderScrollButton?: Boolean;
 }
 
 interface BackgroundImageProps {
   image: string;
 }
 
-const HeroHeader = ({ image, title: Title, subtitle: Subtitle }: HeroHeaderProps) => (
-  <BackgroundImage image={image}>
+const HeroHeader = ({
+  className,
+  image = '',
+  title: Title,
+  subtitle: Subtitle,
+  children,
+  hideHeaderScrollButton,
+}: HeroHeaderProps) => (
+  <BackgroundImage className={className} image={image}>
     <TextContainer>
       {Title && <Title />}
       {Subtitle && <Subtitle />}
     </TextContainer>
-    <HeroHeaderScrollButton />
+    {children}
+    {!hideHeaderScrollButton && <HeroHeaderScrollButton />}
   </BackgroundImage>
 );
 
