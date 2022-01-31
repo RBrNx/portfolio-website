@@ -7,7 +7,7 @@ import PortfolioTitle from '../../features/portfolio/Title';
 import PortfolioSubtitle from '../../features/portfolio/Subtitle';
 import Section from '../../library/components/Section';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
-import { AllPortfolioItemsQuery, GraphCms_PortfolioItem } from '../../library/graphqlTypes';
+import { AllPortfolioItemsQuery, GraphCms_PortfolioItem } from '../../../graphql-types';
 
 interface PortfolioItem extends GraphCms_PortfolioItem {
   portfolioPath: string;

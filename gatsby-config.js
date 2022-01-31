@@ -10,6 +10,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-fontawesome-css',
+    'gatsby-plugin-graphql-codegen',
     {
       resolve: require.resolve(`./plugins/gatsby-plugin-child-router`),
       options: {

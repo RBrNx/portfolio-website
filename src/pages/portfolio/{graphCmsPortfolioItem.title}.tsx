@@ -5,7 +5,7 @@ import CardModal from '../../library/components/CardModal';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
 import PortfolioCardBack from '../../features/portfolio/PortfolioCardBack';
 import { wrapAnchors } from '../../library/utils/DOMParser';
-import { PortfolioItemQuery } from '../../library/graphqlTypes';
+import { PortfolioItemQuery } from '../../../graphql-types';
 
 interface NavigationState {
   initialModalStyle: {
