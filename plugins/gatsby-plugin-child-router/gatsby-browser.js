@@ -8,7 +8,8 @@
 import React from 'react';
 import ChildRouter from './ChildRouter';
 
-const wrapPageElement = ({ props }, { routes }) => React.createElement(ChildRouter, { ...props, routes });
+const wrapPageElement = ({ props }, { routes }) =>
+  React.createElement(ChildRouter, { ...props, routes, key: props.path });
 
 const shouldUpdateScroll = () => false;
 
