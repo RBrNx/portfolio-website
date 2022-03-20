@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { graphql, PageProps } from 'gatsby';
 import DefaultLayout from '../layouts/Default';
-import HomeHeaderImage from '../images/hero/home-header.jpeg';
 import PortfolioTitle from '../features/portfolio/Title';
 import PortfolioSubtitle from '../features/portfolio/Subtitle';
 import Section from '../library/components/Section';
 import SpecialityCard from '../features/about/SpecialityCard';
 import { AllAboutDetailsQuery } from '../../graphql-types';
 import TechnologyCard from '../features/about/TechnologyCard';
+import ClydeArcImage from '../images/hero/clyde-arc.jpg';
+import DukeOfWellingtonImage from '../images/hero/duke-of-wellington.jpg';
+import GeorgeSquareImage from '../images/hero/george-square.jpg';
+import HydroImage from '../images/hero/hydro.jpg';
+
+const headerImages = [ClydeArcImage, DukeOfWellingtonImage, GeorgeSquareImage, HydroImage];
 
 const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
+  const [imageIndex, setImageIndex] = useState(0);
   const { nodes: specialities } = data?.allGraphCmsSpeciality || {};
   const { nodes: technologies } = data?.allGraphCmsTechnology || {};
 
+  useEffect(() => {
+    const imageTimer = setInterval(() => setImageIndex(index => (index + 1) % headerImages.length), 6000);
+
+    return () => clearInterval(imageTimer);
+  }, []);
+
   return (
-    <DefaultLayout heroImage={HomeHeaderImage} heroTitle={PortfolioTitle} heroSubtitle={PortfolioSubtitle}>
-      <Section title='My Specialities'>
+    <DefaultLayout heroImage={headerImages[imageIndex]} heroTitle={PortfolioTitle} heroSubtitle={PortfolioSubtitle}>
+      <Section title='My Specialities' subtitle='Here are the skills that I can bring to a work environment.'>
         <GridContainer>
           {specialities?.map(speciality => (
             <SpecialityCard
@@ -28,7 +40,10 @@ const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
           ))}
         </GridContainer>
       </Section>
-      <Section title='Tools and Technologies'>
+      <Section
+        title='Tools and Technologies'
+        subtitle='A guide to the tools and technologies that I have experience with.'
+      >
         <GridContainer>
           {technologies?.map(technology => (
             <TechnologyCard
