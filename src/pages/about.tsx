@@ -8,9 +8,11 @@ import PortfolioSubtitle from '../features/portfolio/Subtitle';
 import Section from '../library/components/Section';
 import SpecialityCard from '../features/about/SpecialityCard';
 import { AllAboutDetailsQuery } from '../../graphql-types';
+import TechnologyCard from '../features/about/TechnologyCard';
 
 const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
   const { nodes: specialities } = data?.allGraphCmsSpeciality || {};
+  const { nodes: technologies } = data?.allGraphCmsTechnology || {};
 
   return (
     <DefaultLayout heroImage={HomeHeaderImage} heroTitle={PortfolioTitle} heroSubtitle={PortfolioSubtitle}>
@@ -22,6 +24,19 @@ const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
               title={speciality.title}
               description={speciality.description.html}
               icon={speciality.icon}
+            />
+          ))}
+        </GridContainer>
+      </Section>
+      <Section title='Tools and Technologies'>
+        <GridContainer>
+          {technologies?.map(technology => (
+            <TechnologyCard
+              key={technology.id}
+              title={technology.title}
+              description={technology.description.html}
+              icon={technology.icon}
+              backgroundColor={technology.backgroundColor.hex}
             />
           ))}
         </GridContainer>
@@ -51,6 +66,22 @@ export const query = graphql`
         icon {
           id
           url
+        }
+      }
+    }
+    allGraphCmsTechnology {
+      nodes {
+        id
+        title
+        description {
+          html
+        }
+        icon {
+          id
+          url
+        }
+        backgroundColor {
+          hex
         }
       }
     }
