@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { CSSProp } from 'styled-components';
 import HeroHeaderScrollButton from './HeroHeaderScrollButton';
 
 interface HeroHeaderProps {
@@ -9,10 +9,12 @@ interface HeroHeaderProps {
   subtitle?: () => JSX.Element;
   children?: React.ReactNode;
   hideHeaderScrollButton?: Boolean;
+  customCSS?: CSSProp;
 }
 
 interface BackgroundImageProps {
   image: string;
+  customCSS?: CSSProp;
 }
 
 const HeroHeader = ({
@@ -22,8 +24,9 @@ const HeroHeader = ({
   subtitle: Subtitle,
   children,
   hideHeaderScrollButton,
+  customCSS,
 }: HeroHeaderProps) => (
-  <BackgroundImage className={className} image={image}>
+  <BackgroundImage className={className} image={image} customCSS={customCSS}>
     <TextContainer>
       {Title && <Title />}
       {Subtitle && <Subtitle />}
@@ -42,6 +45,7 @@ const BackgroundImage = styled.section<BackgroundImageProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${props => props.customCSS};
 
   &:before {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7));

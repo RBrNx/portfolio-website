@@ -1,18 +1,28 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+import { CSSProp } from 'styled-components';
 import Navbar from '../features/navigation/Navbar';
 import Footer from '../library/components/Footer';
 import HeroHeader from '../library/components/HeroHeader';
 import { usePageTransition } from '../library/context/PageTransition';
 
 interface DefaultLayoutProps {
-  children: React.ReactNode;
-  heroImage: string;
+  children?: React.ReactNode;
+  heroImage?: string;
   heroTitle: () => JSX.Element;
-  heroSubtitle: () => JSX.Element;
+  heroSubtitle?: () => JSX.Element;
+  heroChildren?: () => JSX.Element;
+  heroStyle?: CSSProp;
 }
 
-const DefaultLayout = ({ children, heroImage, heroTitle, heroSubtitle }: DefaultLayoutProps) => {
+const DefaultLayout = ({
+  children,
+  heroImage,
+  heroTitle,
+  heroSubtitle,
+  heroChildren: HeroChildren,
+  heroStyle,
+}: DefaultLayoutProps) => {
   const { enter, animate, exit } = usePageTransition();
 
   return (
@@ -29,7 +39,9 @@ const DefaultLayout = ({ children, heroImage, heroTitle, heroSubtitle }: Default
           duration: 0.3,
         }}
       >
-        <HeroHeader image={heroImage} title={heroTitle} subtitle={heroSubtitle} />
+        <HeroHeader image={heroImage} title={heroTitle} subtitle={heroSubtitle} customCSS={heroStyle}>
+          {HeroChildren && <HeroChildren />}
+        </HeroHeader>
         <div id='main-content'>{children}</div>
       </motion.main>
       <Footer />
