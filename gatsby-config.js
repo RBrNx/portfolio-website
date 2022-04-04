@@ -12,6 +12,14 @@ module.exports = {
     'gatsby-plugin-fontawesome-css',
     'gatsby-plugin-graphql-codegen',
     {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /svg/,
+        },
+      },
+    },
+    {
       resolve: require.resolve(`./plugins/gatsby-plugin-child-router`),
       options: {
         pageRendererPath: `${__dirname}/src/library/components/PageRenderer.tsx`,
