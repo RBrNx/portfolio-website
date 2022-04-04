@@ -10,7 +10,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-fontawesome-css',
-    'gatsby-plugin-graphql-codegen',
+    // 'gatsby-plugin-graphql-codegen',
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {
@@ -23,7 +23,7 @@ module.exports = {
       resolve: require.resolve(`./plugins/gatsby-plugin-child-router`),
       options: {
         pageRendererPath: `${__dirname}/src/library/components/PageRenderer.tsx`,
-        routes: ['/portfolio/:slug/'],
+        routes: ['/portfolio/:slug/', '/blog/:slug/'],
       },
     },
     {
