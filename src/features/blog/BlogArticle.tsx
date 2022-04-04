@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import ProfilePicture from '../../images/ConorWatson.png';
 import HeroHeader from '../../library/components/HeroHeader';
+import SocialShare from './SocialShare';
 
 interface BlogArticleProps {
   title: string;
@@ -54,6 +55,12 @@ const BlogArticle = ({ title, description, headerImageUrl, content, publishedAt 
               </span>
             </AuthorInfo>
           </BlogMetadata>
+          <SocialShare
+            url={window.location.href}
+            title={title}
+            description={description}
+            headerImageUrl={headerImageUrl}
+          />
         </MetadataContainer>
         <BlogContent dangerouslySetInnerHTML={{ __html: content }} />
       </ArticleContainer>
@@ -102,6 +109,7 @@ const BlogMetadata = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
+  margin-bottom: 25px;
 
   img {
     max-height: 75px;
