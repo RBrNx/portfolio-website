@@ -48,11 +48,22 @@ const useProviderTransition = (nextRoute: Location, prevRoute: Location) => {
   const prevPageIndex = getPageIndex(prevRoute?.pathname);
   const nextPageIndex = getPageIndex(nextRoute.pathname);
 
+  const fromDepth = prevRoute?.pathname.split(`/`).length || 0;
+  const toDepth = nextRoute.pathname.split(`/`).length;
+
   if (!prevRoute) {
     return {
       enter: LEFT_ANIM,
       animate: ENTER_ANIM,
       exit: RIGHT_ANIM,
+    };
+  }
+
+  if (fromDepth > 2 || toDepth > 2) {
+    return {
+      enter: false,
+      animate: false,
+      exit: false,
     };
   }
 
