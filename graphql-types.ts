@@ -718,6 +718,53 @@ export type GraphCms_ScheduledOperation = Node & {
   internal: Internal;
 };
 
+export type GraphCms_Blog = Node & {
+  remoteTypeName: Scalars['String'];
+  remoteId: Scalars['ID'];
+  stage: GraphCms_Stage;
+  createdAt: Scalars['JSON'];
+  updatedAt: Scalars['JSON'];
+  publishedAt?: Maybe<Scalars['JSON']>;
+  title: Scalars['String'];
+  description: Scalars['String'];
+  content: GraphCms_RichText;
+  createdBy?: Maybe<GraphCms_User>;
+  updatedBy?: Maybe<GraphCms_User>;
+  publishedBy?: Maybe<GraphCms_User>;
+  headerImage: GraphCms_Asset;
+  type: GraphCms_BlogType;
+  categories: Array<GraphCms_BlogCategories>;
+  scheduledIn: Array<GraphCms_ScheduledOperation>;
+  gatsbyPath?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type GraphCms_BlogGatsbyPathArgs = {
+  filePath?: InputMaybe<Scalars['String']>;
+};
+
+export type GraphCms_RichText = {
+  remoteTypeName: Scalars['String'];
+  raw: Scalars['JSON'];
+  html: Scalars['String'];
+  markdown: Scalars['String'];
+  text: Scalars['String'];
+};
+
+export type GraphCms_BlogType =
+  | 'Blog'
+  | 'Tutorial'
+  | 'Lab';
+
+export type GraphCms_BlogCategories =
+  | 'Javascript'
+  | 'Vue'
+  | 'React';
+
 export type GraphCms_Link = Node & {
   remoteTypeName: Scalars['String'];
   remoteId: Scalars['ID'];
@@ -736,14 +783,6 @@ export type GraphCms_Link = Node & {
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-};
-
-export type GraphCms_RichText = {
-  remoteTypeName: Scalars['String'];
-  raw: Scalars['JSON'];
-  html: Scalars['String'];
-  markdown: Scalars['String'];
-  text: Scalars['String'];
 };
 
 export type GraphCms_ScheduledRelease = Node & {
@@ -777,7 +816,7 @@ export type GraphCms_ScheduledOperationStatus =
   | 'FAILED'
   | 'CANCELED';
 
-export type GraphCms_ScheduledOperationAffectedDocument = GraphCms_Asset | GraphCms_Link | GraphCms_PortfolioItem | GraphCms_Speciality | GraphCms_Technology;
+export type GraphCms_ScheduledOperationAffectedDocument = GraphCms_Asset | GraphCms_Blog | GraphCms_Link | GraphCms_PortfolioItem | GraphCms_Speciality | GraphCms_Technology;
 
 export type GraphCms_ScheduledReleaseStatus =
   | 'PENDING'
@@ -872,6 +911,8 @@ export type Query = {
   allGraphCmsPortfolioItem: GraphCms_PortfolioItemConnection;
   graphCmsScheduledOperation?: Maybe<GraphCms_ScheduledOperation>;
   allGraphCmsScheduledOperation: GraphCms_ScheduledOperationConnection;
+  graphCmsBlog?: Maybe<GraphCms_Blog>;
+  allGraphCmsBlog: GraphCms_BlogConnection;
   graphCmsLink?: Maybe<GraphCms_Link>;
   allGraphCmsLink: GraphCms_LinkConnection;
   graphCmsScheduledRelease?: Maybe<GraphCms_ScheduledRelease>;
@@ -1233,6 +1274,39 @@ export type QueryGraphCmsScheduledOperationArgs = {
 export type QueryAllGraphCmsScheduledOperationArgs = {
   filter?: InputMaybe<GraphCms_ScheduledOperationFilterInput>;
   sort?: InputMaybe<GraphCms_ScheduledOperationSortInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryGraphCmsBlogArgs = {
+  remoteTypeName?: InputMaybe<StringQueryOperatorInput>;
+  remoteId?: InputMaybe<IdQueryOperatorInput>;
+  stage?: InputMaybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: InputMaybe<JsonQueryOperatorInput>;
+  updatedAt?: InputMaybe<JsonQueryOperatorInput>;
+  publishedAt?: InputMaybe<JsonQueryOperatorInput>;
+  title?: InputMaybe<StringQueryOperatorInput>;
+  description?: InputMaybe<StringQueryOperatorInput>;
+  content?: InputMaybe<GraphCms_RichTextFilterInput>;
+  createdBy?: InputMaybe<GraphCms_UserFilterInput>;
+  updatedBy?: InputMaybe<GraphCms_UserFilterInput>;
+  publishedBy?: InputMaybe<GraphCms_UserFilterInput>;
+  headerImage?: InputMaybe<GraphCms_AssetFilterInput>;
+  type?: InputMaybe<GraphCms_BlogTypeQueryOperatorInput>;
+  categories?: InputMaybe<GraphCms_BlogCategoriesQueryOperatorInput>;
+  scheduledIn?: InputMaybe<GraphCms_ScheduledOperationFilterListInput>;
+  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+
+export type QueryAllGraphCmsBlogArgs = {
+  filter?: InputMaybe<GraphCms_BlogFilterInput>;
+  sort?: InputMaybe<GraphCms_BlogSortInput>;
   skip?: InputMaybe<Scalars['Int']>;
   limit?: InputMaybe<Scalars['Int']>;
 };
@@ -6282,6 +6356,892 @@ export type GraphCms_ScheduledOperationSortInput = {
   order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
 };
 
+export type GraphCms_BlogTypeQueryOperatorInput = {
+  eq?: InputMaybe<GraphCms_BlogType>;
+  ne?: InputMaybe<GraphCms_BlogType>;
+  in?: InputMaybe<Array<InputMaybe<GraphCms_BlogType>>>;
+  nin?: InputMaybe<Array<InputMaybe<GraphCms_BlogType>>>;
+};
+
+export type GraphCms_BlogCategoriesQueryOperatorInput = {
+  eq?: InputMaybe<GraphCms_BlogCategories>;
+  ne?: InputMaybe<GraphCms_BlogCategories>;
+  in?: InputMaybe<Array<InputMaybe<GraphCms_BlogCategories>>>;
+  nin?: InputMaybe<Array<InputMaybe<GraphCms_BlogCategories>>>;
+};
+
+export type GraphCms_BlogConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_BlogEdge>;
+  nodes: Array<GraphCms_Blog>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<GraphCms_BlogGroupConnection>;
+};
+
+
+export type GraphCms_BlogConnectionDistinctArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogConnectionMaxArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogConnectionMinArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogConnectionSumArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: GraphCms_BlogFieldsEnum;
+};
+
+export type GraphCms_BlogEdge = {
+  next?: Maybe<GraphCms_Blog>;
+  node: GraphCms_Blog;
+  previous?: Maybe<GraphCms_Blog>;
+};
+
+export type GraphCms_BlogFieldsEnum =
+  | 'remoteTypeName'
+  | 'remoteId'
+  | 'stage'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'title'
+  | 'description'
+  | 'content___remoteTypeName'
+  | 'content___raw'
+  | 'content___html'
+  | 'content___markdown'
+  | 'content___text'
+  | 'createdBy___remoteTypeName'
+  | 'createdBy___remoteId'
+  | 'createdBy___stage'
+  | 'createdBy___createdAt'
+  | 'createdBy___updatedAt'
+  | 'createdBy___publishedAt'
+  | 'createdBy___name'
+  | 'createdBy___picture'
+  | 'createdBy___isActive'
+  | 'createdBy___kind'
+  | 'createdBy___id'
+  | 'createdBy___parent___id'
+  | 'createdBy___parent___parent___id'
+  | 'createdBy___parent___parent___children'
+  | 'createdBy___parent___children'
+  | 'createdBy___parent___children___id'
+  | 'createdBy___parent___children___children'
+  | 'createdBy___parent___internal___content'
+  | 'createdBy___parent___internal___contentDigest'
+  | 'createdBy___parent___internal___description'
+  | 'createdBy___parent___internal___fieldOwners'
+  | 'createdBy___parent___internal___ignoreType'
+  | 'createdBy___parent___internal___mediaType'
+  | 'createdBy___parent___internal___owner'
+  | 'createdBy___parent___internal___type'
+  | 'createdBy___children'
+  | 'createdBy___children___id'
+  | 'createdBy___children___parent___id'
+  | 'createdBy___children___parent___children'
+  | 'createdBy___children___children'
+  | 'createdBy___children___children___id'
+  | 'createdBy___children___children___children'
+  | 'createdBy___children___internal___content'
+  | 'createdBy___children___internal___contentDigest'
+  | 'createdBy___children___internal___description'
+  | 'createdBy___children___internal___fieldOwners'
+  | 'createdBy___children___internal___ignoreType'
+  | 'createdBy___children___internal___mediaType'
+  | 'createdBy___children___internal___owner'
+  | 'createdBy___children___internal___type'
+  | 'createdBy___internal___content'
+  | 'createdBy___internal___contentDigest'
+  | 'createdBy___internal___description'
+  | 'createdBy___internal___fieldOwners'
+  | 'createdBy___internal___ignoreType'
+  | 'createdBy___internal___mediaType'
+  | 'createdBy___internal___owner'
+  | 'createdBy___internal___type'
+  | 'updatedBy___remoteTypeName'
+  | 'updatedBy___remoteId'
+  | 'updatedBy___stage'
+  | 'updatedBy___createdAt'
+  | 'updatedBy___updatedAt'
+  | 'updatedBy___publishedAt'
+  | 'updatedBy___name'
+  | 'updatedBy___picture'
+  | 'updatedBy___isActive'
+  | 'updatedBy___kind'
+  | 'updatedBy___id'
+  | 'updatedBy___parent___id'
+  | 'updatedBy___parent___parent___id'
+  | 'updatedBy___parent___parent___children'
+  | 'updatedBy___parent___children'
+  | 'updatedBy___parent___children___id'
+  | 'updatedBy___parent___children___children'
+  | 'updatedBy___parent___internal___content'
+  | 'updatedBy___parent___internal___contentDigest'
+  | 'updatedBy___parent___internal___description'
+  | 'updatedBy___parent___internal___fieldOwners'
+  | 'updatedBy___parent___internal___ignoreType'
+  | 'updatedBy___parent___internal___mediaType'
+  | 'updatedBy___parent___internal___owner'
+  | 'updatedBy___parent___internal___type'
+  | 'updatedBy___children'
+  | 'updatedBy___children___id'
+  | 'updatedBy___children___parent___id'
+  | 'updatedBy___children___parent___children'
+  | 'updatedBy___children___children'
+  | 'updatedBy___children___children___id'
+  | 'updatedBy___children___children___children'
+  | 'updatedBy___children___internal___content'
+  | 'updatedBy___children___internal___contentDigest'
+  | 'updatedBy___children___internal___description'
+  | 'updatedBy___children___internal___fieldOwners'
+  | 'updatedBy___children___internal___ignoreType'
+  | 'updatedBy___children___internal___mediaType'
+  | 'updatedBy___children___internal___owner'
+  | 'updatedBy___children___internal___type'
+  | 'updatedBy___internal___content'
+  | 'updatedBy___internal___contentDigest'
+  | 'updatedBy___internal___description'
+  | 'updatedBy___internal___fieldOwners'
+  | 'updatedBy___internal___ignoreType'
+  | 'updatedBy___internal___mediaType'
+  | 'updatedBy___internal___owner'
+  | 'updatedBy___internal___type'
+  | 'publishedBy___remoteTypeName'
+  | 'publishedBy___remoteId'
+  | 'publishedBy___stage'
+  | 'publishedBy___createdAt'
+  | 'publishedBy___updatedAt'
+  | 'publishedBy___publishedAt'
+  | 'publishedBy___name'
+  | 'publishedBy___picture'
+  | 'publishedBy___isActive'
+  | 'publishedBy___kind'
+  | 'publishedBy___id'
+  | 'publishedBy___parent___id'
+  | 'publishedBy___parent___parent___id'
+  | 'publishedBy___parent___parent___children'
+  | 'publishedBy___parent___children'
+  | 'publishedBy___parent___children___id'
+  | 'publishedBy___parent___children___children'
+  | 'publishedBy___parent___internal___content'
+  | 'publishedBy___parent___internal___contentDigest'
+  | 'publishedBy___parent___internal___description'
+  | 'publishedBy___parent___internal___fieldOwners'
+  | 'publishedBy___parent___internal___ignoreType'
+  | 'publishedBy___parent___internal___mediaType'
+  | 'publishedBy___parent___internal___owner'
+  | 'publishedBy___parent___internal___type'
+  | 'publishedBy___children'
+  | 'publishedBy___children___id'
+  | 'publishedBy___children___parent___id'
+  | 'publishedBy___children___parent___children'
+  | 'publishedBy___children___children'
+  | 'publishedBy___children___children___id'
+  | 'publishedBy___children___children___children'
+  | 'publishedBy___children___internal___content'
+  | 'publishedBy___children___internal___contentDigest'
+  | 'publishedBy___children___internal___description'
+  | 'publishedBy___children___internal___fieldOwners'
+  | 'publishedBy___children___internal___ignoreType'
+  | 'publishedBy___children___internal___mediaType'
+  | 'publishedBy___children___internal___owner'
+  | 'publishedBy___children___internal___type'
+  | 'publishedBy___internal___content'
+  | 'publishedBy___internal___contentDigest'
+  | 'publishedBy___internal___description'
+  | 'publishedBy___internal___fieldOwners'
+  | 'publishedBy___internal___ignoreType'
+  | 'publishedBy___internal___mediaType'
+  | 'publishedBy___internal___owner'
+  | 'publishedBy___internal___type'
+  | 'headerImage___remoteTypeName'
+  | 'headerImage___remoteId'
+  | 'headerImage___locale'
+  | 'headerImage___stage'
+  | 'headerImage___createdAt'
+  | 'headerImage___updatedAt'
+  | 'headerImage___publishedAt'
+  | 'headerImage___handle'
+  | 'headerImage___fileName'
+  | 'headerImage___height'
+  | 'headerImage___width'
+  | 'headerImage___size'
+  | 'headerImage___mimeType'
+  | 'headerImage___createdBy___remoteTypeName'
+  | 'headerImage___createdBy___remoteId'
+  | 'headerImage___createdBy___stage'
+  | 'headerImage___createdBy___createdAt'
+  | 'headerImage___createdBy___updatedAt'
+  | 'headerImage___createdBy___publishedAt'
+  | 'headerImage___createdBy___name'
+  | 'headerImage___createdBy___picture'
+  | 'headerImage___createdBy___isActive'
+  | 'headerImage___createdBy___kind'
+  | 'headerImage___createdBy___id'
+  | 'headerImage___createdBy___parent___id'
+  | 'headerImage___createdBy___parent___children'
+  | 'headerImage___createdBy___children'
+  | 'headerImage___createdBy___children___id'
+  | 'headerImage___createdBy___children___children'
+  | 'headerImage___createdBy___internal___content'
+  | 'headerImage___createdBy___internal___contentDigest'
+  | 'headerImage___createdBy___internal___description'
+  | 'headerImage___createdBy___internal___fieldOwners'
+  | 'headerImage___createdBy___internal___ignoreType'
+  | 'headerImage___createdBy___internal___mediaType'
+  | 'headerImage___createdBy___internal___owner'
+  | 'headerImage___createdBy___internal___type'
+  | 'headerImage___updatedBy___remoteTypeName'
+  | 'headerImage___updatedBy___remoteId'
+  | 'headerImage___updatedBy___stage'
+  | 'headerImage___updatedBy___createdAt'
+  | 'headerImage___updatedBy___updatedAt'
+  | 'headerImage___updatedBy___publishedAt'
+  | 'headerImage___updatedBy___name'
+  | 'headerImage___updatedBy___picture'
+  | 'headerImage___updatedBy___isActive'
+  | 'headerImage___updatedBy___kind'
+  | 'headerImage___updatedBy___id'
+  | 'headerImage___updatedBy___parent___id'
+  | 'headerImage___updatedBy___parent___children'
+  | 'headerImage___updatedBy___children'
+  | 'headerImage___updatedBy___children___id'
+  | 'headerImage___updatedBy___children___children'
+  | 'headerImage___updatedBy___internal___content'
+  | 'headerImage___updatedBy___internal___contentDigest'
+  | 'headerImage___updatedBy___internal___description'
+  | 'headerImage___updatedBy___internal___fieldOwners'
+  | 'headerImage___updatedBy___internal___ignoreType'
+  | 'headerImage___updatedBy___internal___mediaType'
+  | 'headerImage___updatedBy___internal___owner'
+  | 'headerImage___updatedBy___internal___type'
+  | 'headerImage___publishedBy___remoteTypeName'
+  | 'headerImage___publishedBy___remoteId'
+  | 'headerImage___publishedBy___stage'
+  | 'headerImage___publishedBy___createdAt'
+  | 'headerImage___publishedBy___updatedAt'
+  | 'headerImage___publishedBy___publishedAt'
+  | 'headerImage___publishedBy___name'
+  | 'headerImage___publishedBy___picture'
+  | 'headerImage___publishedBy___isActive'
+  | 'headerImage___publishedBy___kind'
+  | 'headerImage___publishedBy___id'
+  | 'headerImage___publishedBy___parent___id'
+  | 'headerImage___publishedBy___parent___children'
+  | 'headerImage___publishedBy___children'
+  | 'headerImage___publishedBy___children___id'
+  | 'headerImage___publishedBy___children___children'
+  | 'headerImage___publishedBy___internal___content'
+  | 'headerImage___publishedBy___internal___contentDigest'
+  | 'headerImage___publishedBy___internal___description'
+  | 'headerImage___publishedBy___internal___fieldOwners'
+  | 'headerImage___publishedBy___internal___ignoreType'
+  | 'headerImage___publishedBy___internal___mediaType'
+  | 'headerImage___publishedBy___internal___owner'
+  | 'headerImage___publishedBy___internal___type'
+  | 'headerImage___carouselImagesPortfolioItem'
+  | 'headerImage___carouselImagesPortfolioItem___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___remoteId'
+  | 'headerImage___carouselImagesPortfolioItem___stage'
+  | 'headerImage___carouselImagesPortfolioItem___createdAt'
+  | 'headerImage___carouselImagesPortfolioItem___updatedAt'
+  | 'headerImage___carouselImagesPortfolioItem___publishedAt'
+  | 'headerImage___carouselImagesPortfolioItem___title'
+  | 'headerImage___carouselImagesPortfolioItem___description'
+  | 'headerImage___carouselImagesPortfolioItem___techSheet'
+  | 'headerImage___carouselImagesPortfolioItem___about___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___about___raw'
+  | 'headerImage___carouselImagesPortfolioItem___about___html'
+  | 'headerImage___carouselImagesPortfolioItem___about___markdown'
+  | 'headerImage___carouselImagesPortfolioItem___about___text'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___remoteId'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___stage'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___createdAt'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___updatedAt'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___publishedAt'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___name'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___picture'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___isActive'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___kind'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___id'
+  | 'headerImage___carouselImagesPortfolioItem___createdBy___children'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___remoteId'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___stage'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___createdAt'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___updatedAt'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___publishedAt'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___name'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___picture'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___isActive'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___kind'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___id'
+  | 'headerImage___carouselImagesPortfolioItem___updatedBy___children'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___remoteId'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___stage'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___createdAt'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___updatedAt'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___publishedAt'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___name'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___picture'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___isActive'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___kind'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___id'
+  | 'headerImage___carouselImagesPortfolioItem___publishedBy___children'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___remoteId'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___locale'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___stage'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___createdAt'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___updatedAt'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___publishedAt'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___handle'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___fileName'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___height'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___width'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___size'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___mimeType'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___carouselImagesPortfolioItem'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___scheduledIn'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___url'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___id'
+  | 'headerImage___carouselImagesPortfolioItem___carouselImages___children'
+  | 'headerImage___carouselImagesPortfolioItem___links'
+  | 'headerImage___carouselImagesPortfolioItem___links___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___links___remoteId'
+  | 'headerImage___carouselImagesPortfolioItem___links___stage'
+  | 'headerImage___carouselImagesPortfolioItem___links___createdAt'
+  | 'headerImage___carouselImagesPortfolioItem___links___updatedAt'
+  | 'headerImage___carouselImagesPortfolioItem___links___publishedAt'
+  | 'headerImage___carouselImagesPortfolioItem___links___title'
+  | 'headerImage___carouselImagesPortfolioItem___links___url'
+  | 'headerImage___carouselImagesPortfolioItem___links___type'
+  | 'headerImage___carouselImagesPortfolioItem___links___scheduledIn'
+  | 'headerImage___carouselImagesPortfolioItem___links___id'
+  | 'headerImage___carouselImagesPortfolioItem___links___children'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___remoteTypeName'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___remoteId'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___stage'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___createdAt'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___updatedAt'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___publishedAt'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___description'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___errorMessage'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___rawPayload'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___status'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___id'
+  | 'headerImage___carouselImagesPortfolioItem___scheduledIn___children'
+  | 'headerImage___carouselImagesPortfolioItem___gatsbyPath'
+  | 'headerImage___carouselImagesPortfolioItem___id'
+  | 'headerImage___carouselImagesPortfolioItem___parent___id'
+  | 'headerImage___carouselImagesPortfolioItem___parent___children'
+  | 'headerImage___carouselImagesPortfolioItem___children'
+  | 'headerImage___carouselImagesPortfolioItem___children___id'
+  | 'headerImage___carouselImagesPortfolioItem___children___children'
+  | 'headerImage___carouselImagesPortfolioItem___internal___content'
+  | 'headerImage___carouselImagesPortfolioItem___internal___contentDigest'
+  | 'headerImage___carouselImagesPortfolioItem___internal___description'
+  | 'headerImage___carouselImagesPortfolioItem___internal___fieldOwners'
+  | 'headerImage___carouselImagesPortfolioItem___internal___ignoreType'
+  | 'headerImage___carouselImagesPortfolioItem___internal___mediaType'
+  | 'headerImage___carouselImagesPortfolioItem___internal___owner'
+  | 'headerImage___carouselImagesPortfolioItem___internal___type'
+  | 'headerImage___scheduledIn'
+  | 'headerImage___scheduledIn___remoteTypeName'
+  | 'headerImage___scheduledIn___remoteId'
+  | 'headerImage___scheduledIn___stage'
+  | 'headerImage___scheduledIn___createdAt'
+  | 'headerImage___scheduledIn___updatedAt'
+  | 'headerImage___scheduledIn___publishedAt'
+  | 'headerImage___scheduledIn___description'
+  | 'headerImage___scheduledIn___errorMessage'
+  | 'headerImage___scheduledIn___rawPayload'
+  | 'headerImage___scheduledIn___createdBy___remoteTypeName'
+  | 'headerImage___scheduledIn___createdBy___remoteId'
+  | 'headerImage___scheduledIn___createdBy___stage'
+  | 'headerImage___scheduledIn___createdBy___createdAt'
+  | 'headerImage___scheduledIn___createdBy___updatedAt'
+  | 'headerImage___scheduledIn___createdBy___publishedAt'
+  | 'headerImage___scheduledIn___createdBy___name'
+  | 'headerImage___scheduledIn___createdBy___picture'
+  | 'headerImage___scheduledIn___createdBy___isActive'
+  | 'headerImage___scheduledIn___createdBy___kind'
+  | 'headerImage___scheduledIn___createdBy___id'
+  | 'headerImage___scheduledIn___createdBy___children'
+  | 'headerImage___scheduledIn___updatedBy___remoteTypeName'
+  | 'headerImage___scheduledIn___updatedBy___remoteId'
+  | 'headerImage___scheduledIn___updatedBy___stage'
+  | 'headerImage___scheduledIn___updatedBy___createdAt'
+  | 'headerImage___scheduledIn___updatedBy___updatedAt'
+  | 'headerImage___scheduledIn___updatedBy___publishedAt'
+  | 'headerImage___scheduledIn___updatedBy___name'
+  | 'headerImage___scheduledIn___updatedBy___picture'
+  | 'headerImage___scheduledIn___updatedBy___isActive'
+  | 'headerImage___scheduledIn___updatedBy___kind'
+  | 'headerImage___scheduledIn___updatedBy___id'
+  | 'headerImage___scheduledIn___updatedBy___children'
+  | 'headerImage___scheduledIn___publishedBy___remoteTypeName'
+  | 'headerImage___scheduledIn___publishedBy___remoteId'
+  | 'headerImage___scheduledIn___publishedBy___stage'
+  | 'headerImage___scheduledIn___publishedBy___createdAt'
+  | 'headerImage___scheduledIn___publishedBy___updatedAt'
+  | 'headerImage___scheduledIn___publishedBy___publishedAt'
+  | 'headerImage___scheduledIn___publishedBy___name'
+  | 'headerImage___scheduledIn___publishedBy___picture'
+  | 'headerImage___scheduledIn___publishedBy___isActive'
+  | 'headerImage___scheduledIn___publishedBy___kind'
+  | 'headerImage___scheduledIn___publishedBy___id'
+  | 'headerImage___scheduledIn___publishedBy___children'
+  | 'headerImage___scheduledIn___release___remoteTypeName'
+  | 'headerImage___scheduledIn___release___remoteId'
+  | 'headerImage___scheduledIn___release___stage'
+  | 'headerImage___scheduledIn___release___createdAt'
+  | 'headerImage___scheduledIn___release___updatedAt'
+  | 'headerImage___scheduledIn___release___publishedAt'
+  | 'headerImage___scheduledIn___release___title'
+  | 'headerImage___scheduledIn___release___description'
+  | 'headerImage___scheduledIn___release___errorMessage'
+  | 'headerImage___scheduledIn___release___isActive'
+  | 'headerImage___scheduledIn___release___isImplicit'
+  | 'headerImage___scheduledIn___release___releaseAt'
+  | 'headerImage___scheduledIn___release___operations'
+  | 'headerImage___scheduledIn___release___status'
+  | 'headerImage___scheduledIn___release___id'
+  | 'headerImage___scheduledIn___release___children'
+  | 'headerImage___scheduledIn___status'
+  | 'headerImage___scheduledIn___id'
+  | 'headerImage___scheduledIn___parent___id'
+  | 'headerImage___scheduledIn___parent___children'
+  | 'headerImage___scheduledIn___children'
+  | 'headerImage___scheduledIn___children___id'
+  | 'headerImage___scheduledIn___children___children'
+  | 'headerImage___scheduledIn___internal___content'
+  | 'headerImage___scheduledIn___internal___contentDigest'
+  | 'headerImage___scheduledIn___internal___description'
+  | 'headerImage___scheduledIn___internal___fieldOwners'
+  | 'headerImage___scheduledIn___internal___ignoreType'
+  | 'headerImage___scheduledIn___internal___mediaType'
+  | 'headerImage___scheduledIn___internal___owner'
+  | 'headerImage___scheduledIn___internal___type'
+  | 'headerImage___url'
+  | 'headerImage___id'
+  | 'headerImage___parent___id'
+  | 'headerImage___parent___parent___id'
+  | 'headerImage___parent___parent___children'
+  | 'headerImage___parent___children'
+  | 'headerImage___parent___children___id'
+  | 'headerImage___parent___children___children'
+  | 'headerImage___parent___internal___content'
+  | 'headerImage___parent___internal___contentDigest'
+  | 'headerImage___parent___internal___description'
+  | 'headerImage___parent___internal___fieldOwners'
+  | 'headerImage___parent___internal___ignoreType'
+  | 'headerImage___parent___internal___mediaType'
+  | 'headerImage___parent___internal___owner'
+  | 'headerImage___parent___internal___type'
+  | 'headerImage___children'
+  | 'headerImage___children___id'
+  | 'headerImage___children___parent___id'
+  | 'headerImage___children___parent___children'
+  | 'headerImage___children___children'
+  | 'headerImage___children___children___id'
+  | 'headerImage___children___children___children'
+  | 'headerImage___children___internal___content'
+  | 'headerImage___children___internal___contentDigest'
+  | 'headerImage___children___internal___description'
+  | 'headerImage___children___internal___fieldOwners'
+  | 'headerImage___children___internal___ignoreType'
+  | 'headerImage___children___internal___mediaType'
+  | 'headerImage___children___internal___owner'
+  | 'headerImage___children___internal___type'
+  | 'headerImage___internal___content'
+  | 'headerImage___internal___contentDigest'
+  | 'headerImage___internal___description'
+  | 'headerImage___internal___fieldOwners'
+  | 'headerImage___internal___ignoreType'
+  | 'headerImage___internal___mediaType'
+  | 'headerImage___internal___owner'
+  | 'headerImage___internal___type'
+  | 'type'
+  | 'categories'
+  | 'scheduledIn'
+  | 'scheduledIn___remoteTypeName'
+  | 'scheduledIn___remoteId'
+  | 'scheduledIn___stage'
+  | 'scheduledIn___createdAt'
+  | 'scheduledIn___updatedAt'
+  | 'scheduledIn___publishedAt'
+  | 'scheduledIn___description'
+  | 'scheduledIn___errorMessage'
+  | 'scheduledIn___rawPayload'
+  | 'scheduledIn___createdBy___remoteTypeName'
+  | 'scheduledIn___createdBy___remoteId'
+  | 'scheduledIn___createdBy___stage'
+  | 'scheduledIn___createdBy___createdAt'
+  | 'scheduledIn___createdBy___updatedAt'
+  | 'scheduledIn___createdBy___publishedAt'
+  | 'scheduledIn___createdBy___name'
+  | 'scheduledIn___createdBy___picture'
+  | 'scheduledIn___createdBy___isActive'
+  | 'scheduledIn___createdBy___kind'
+  | 'scheduledIn___createdBy___id'
+  | 'scheduledIn___createdBy___parent___id'
+  | 'scheduledIn___createdBy___parent___children'
+  | 'scheduledIn___createdBy___children'
+  | 'scheduledIn___createdBy___children___id'
+  | 'scheduledIn___createdBy___children___children'
+  | 'scheduledIn___createdBy___internal___content'
+  | 'scheduledIn___createdBy___internal___contentDigest'
+  | 'scheduledIn___createdBy___internal___description'
+  | 'scheduledIn___createdBy___internal___fieldOwners'
+  | 'scheduledIn___createdBy___internal___ignoreType'
+  | 'scheduledIn___createdBy___internal___mediaType'
+  | 'scheduledIn___createdBy___internal___owner'
+  | 'scheduledIn___createdBy___internal___type'
+  | 'scheduledIn___updatedBy___remoteTypeName'
+  | 'scheduledIn___updatedBy___remoteId'
+  | 'scheduledIn___updatedBy___stage'
+  | 'scheduledIn___updatedBy___createdAt'
+  | 'scheduledIn___updatedBy___updatedAt'
+  | 'scheduledIn___updatedBy___publishedAt'
+  | 'scheduledIn___updatedBy___name'
+  | 'scheduledIn___updatedBy___picture'
+  | 'scheduledIn___updatedBy___isActive'
+  | 'scheduledIn___updatedBy___kind'
+  | 'scheduledIn___updatedBy___id'
+  | 'scheduledIn___updatedBy___parent___id'
+  | 'scheduledIn___updatedBy___parent___children'
+  | 'scheduledIn___updatedBy___children'
+  | 'scheduledIn___updatedBy___children___id'
+  | 'scheduledIn___updatedBy___children___children'
+  | 'scheduledIn___updatedBy___internal___content'
+  | 'scheduledIn___updatedBy___internal___contentDigest'
+  | 'scheduledIn___updatedBy___internal___description'
+  | 'scheduledIn___updatedBy___internal___fieldOwners'
+  | 'scheduledIn___updatedBy___internal___ignoreType'
+  | 'scheduledIn___updatedBy___internal___mediaType'
+  | 'scheduledIn___updatedBy___internal___owner'
+  | 'scheduledIn___updatedBy___internal___type'
+  | 'scheduledIn___publishedBy___remoteTypeName'
+  | 'scheduledIn___publishedBy___remoteId'
+  | 'scheduledIn___publishedBy___stage'
+  | 'scheduledIn___publishedBy___createdAt'
+  | 'scheduledIn___publishedBy___updatedAt'
+  | 'scheduledIn___publishedBy___publishedAt'
+  | 'scheduledIn___publishedBy___name'
+  | 'scheduledIn___publishedBy___picture'
+  | 'scheduledIn___publishedBy___isActive'
+  | 'scheduledIn___publishedBy___kind'
+  | 'scheduledIn___publishedBy___id'
+  | 'scheduledIn___publishedBy___parent___id'
+  | 'scheduledIn___publishedBy___parent___children'
+  | 'scheduledIn___publishedBy___children'
+  | 'scheduledIn___publishedBy___children___id'
+  | 'scheduledIn___publishedBy___children___children'
+  | 'scheduledIn___publishedBy___internal___content'
+  | 'scheduledIn___publishedBy___internal___contentDigest'
+  | 'scheduledIn___publishedBy___internal___description'
+  | 'scheduledIn___publishedBy___internal___fieldOwners'
+  | 'scheduledIn___publishedBy___internal___ignoreType'
+  | 'scheduledIn___publishedBy___internal___mediaType'
+  | 'scheduledIn___publishedBy___internal___owner'
+  | 'scheduledIn___publishedBy___internal___type'
+  | 'scheduledIn___release___remoteTypeName'
+  | 'scheduledIn___release___remoteId'
+  | 'scheduledIn___release___stage'
+  | 'scheduledIn___release___createdAt'
+  | 'scheduledIn___release___updatedAt'
+  | 'scheduledIn___release___publishedAt'
+  | 'scheduledIn___release___title'
+  | 'scheduledIn___release___description'
+  | 'scheduledIn___release___errorMessage'
+  | 'scheduledIn___release___isActive'
+  | 'scheduledIn___release___isImplicit'
+  | 'scheduledIn___release___releaseAt'
+  | 'scheduledIn___release___createdBy___remoteTypeName'
+  | 'scheduledIn___release___createdBy___remoteId'
+  | 'scheduledIn___release___createdBy___stage'
+  | 'scheduledIn___release___createdBy___createdAt'
+  | 'scheduledIn___release___createdBy___updatedAt'
+  | 'scheduledIn___release___createdBy___publishedAt'
+  | 'scheduledIn___release___createdBy___name'
+  | 'scheduledIn___release___createdBy___picture'
+  | 'scheduledIn___release___createdBy___isActive'
+  | 'scheduledIn___release___createdBy___kind'
+  | 'scheduledIn___release___createdBy___id'
+  | 'scheduledIn___release___createdBy___children'
+  | 'scheduledIn___release___updatedBy___remoteTypeName'
+  | 'scheduledIn___release___updatedBy___remoteId'
+  | 'scheduledIn___release___updatedBy___stage'
+  | 'scheduledIn___release___updatedBy___createdAt'
+  | 'scheduledIn___release___updatedBy___updatedAt'
+  | 'scheduledIn___release___updatedBy___publishedAt'
+  | 'scheduledIn___release___updatedBy___name'
+  | 'scheduledIn___release___updatedBy___picture'
+  | 'scheduledIn___release___updatedBy___isActive'
+  | 'scheduledIn___release___updatedBy___kind'
+  | 'scheduledIn___release___updatedBy___id'
+  | 'scheduledIn___release___updatedBy___children'
+  | 'scheduledIn___release___publishedBy___remoteTypeName'
+  | 'scheduledIn___release___publishedBy___remoteId'
+  | 'scheduledIn___release___publishedBy___stage'
+  | 'scheduledIn___release___publishedBy___createdAt'
+  | 'scheduledIn___release___publishedBy___updatedAt'
+  | 'scheduledIn___release___publishedBy___publishedAt'
+  | 'scheduledIn___release___publishedBy___name'
+  | 'scheduledIn___release___publishedBy___picture'
+  | 'scheduledIn___release___publishedBy___isActive'
+  | 'scheduledIn___release___publishedBy___kind'
+  | 'scheduledIn___release___publishedBy___id'
+  | 'scheduledIn___release___publishedBy___children'
+  | 'scheduledIn___release___operations'
+  | 'scheduledIn___release___operations___remoteTypeName'
+  | 'scheduledIn___release___operations___remoteId'
+  | 'scheduledIn___release___operations___stage'
+  | 'scheduledIn___release___operations___createdAt'
+  | 'scheduledIn___release___operations___updatedAt'
+  | 'scheduledIn___release___operations___publishedAt'
+  | 'scheduledIn___release___operations___description'
+  | 'scheduledIn___release___operations___errorMessage'
+  | 'scheduledIn___release___operations___rawPayload'
+  | 'scheduledIn___release___operations___status'
+  | 'scheduledIn___release___operations___id'
+  | 'scheduledIn___release___operations___children'
+  | 'scheduledIn___release___status'
+  | 'scheduledIn___release___id'
+  | 'scheduledIn___release___parent___id'
+  | 'scheduledIn___release___parent___children'
+  | 'scheduledIn___release___children'
+  | 'scheduledIn___release___children___id'
+  | 'scheduledIn___release___children___children'
+  | 'scheduledIn___release___internal___content'
+  | 'scheduledIn___release___internal___contentDigest'
+  | 'scheduledIn___release___internal___description'
+  | 'scheduledIn___release___internal___fieldOwners'
+  | 'scheduledIn___release___internal___ignoreType'
+  | 'scheduledIn___release___internal___mediaType'
+  | 'scheduledIn___release___internal___owner'
+  | 'scheduledIn___release___internal___type'
+  | 'scheduledIn___status'
+  | 'scheduledIn___id'
+  | 'scheduledIn___parent___id'
+  | 'scheduledIn___parent___parent___id'
+  | 'scheduledIn___parent___parent___children'
+  | 'scheduledIn___parent___children'
+  | 'scheduledIn___parent___children___id'
+  | 'scheduledIn___parent___children___children'
+  | 'scheduledIn___parent___internal___content'
+  | 'scheduledIn___parent___internal___contentDigest'
+  | 'scheduledIn___parent___internal___description'
+  | 'scheduledIn___parent___internal___fieldOwners'
+  | 'scheduledIn___parent___internal___ignoreType'
+  | 'scheduledIn___parent___internal___mediaType'
+  | 'scheduledIn___parent___internal___owner'
+  | 'scheduledIn___parent___internal___type'
+  | 'scheduledIn___children'
+  | 'scheduledIn___children___id'
+  | 'scheduledIn___children___parent___id'
+  | 'scheduledIn___children___parent___children'
+  | 'scheduledIn___children___children'
+  | 'scheduledIn___children___children___id'
+  | 'scheduledIn___children___children___children'
+  | 'scheduledIn___children___internal___content'
+  | 'scheduledIn___children___internal___contentDigest'
+  | 'scheduledIn___children___internal___description'
+  | 'scheduledIn___children___internal___fieldOwners'
+  | 'scheduledIn___children___internal___ignoreType'
+  | 'scheduledIn___children___internal___mediaType'
+  | 'scheduledIn___children___internal___owner'
+  | 'scheduledIn___children___internal___type'
+  | 'scheduledIn___internal___content'
+  | 'scheduledIn___internal___contentDigest'
+  | 'scheduledIn___internal___description'
+  | 'scheduledIn___internal___fieldOwners'
+  | 'scheduledIn___internal___ignoreType'
+  | 'scheduledIn___internal___mediaType'
+  | 'scheduledIn___internal___owner'
+  | 'scheduledIn___internal___type'
+  | 'gatsbyPath'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type GraphCms_BlogGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_BlogEdge>;
+  nodes: Array<GraphCms_Blog>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<GraphCms_BlogGroupConnection>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+
+export type GraphCms_BlogGroupConnectionDistinctArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogGroupConnectionMaxArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogGroupConnectionMinArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogGroupConnectionSumArgs = {
+  field: GraphCms_BlogFieldsEnum;
+};
+
+
+export type GraphCms_BlogGroupConnectionGroupArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  field: GraphCms_BlogFieldsEnum;
+};
+
+export type GraphCms_BlogFilterInput = {
+  remoteTypeName?: InputMaybe<StringQueryOperatorInput>;
+  remoteId?: InputMaybe<IdQueryOperatorInput>;
+  stage?: InputMaybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: InputMaybe<JsonQueryOperatorInput>;
+  updatedAt?: InputMaybe<JsonQueryOperatorInput>;
+  publishedAt?: InputMaybe<JsonQueryOperatorInput>;
+  title?: InputMaybe<StringQueryOperatorInput>;
+  description?: InputMaybe<StringQueryOperatorInput>;
+  content?: InputMaybe<GraphCms_RichTextFilterInput>;
+  createdBy?: InputMaybe<GraphCms_UserFilterInput>;
+  updatedBy?: InputMaybe<GraphCms_UserFilterInput>;
+  publishedBy?: InputMaybe<GraphCms_UserFilterInput>;
+  headerImage?: InputMaybe<GraphCms_AssetFilterInput>;
+  type?: InputMaybe<GraphCms_BlogTypeQueryOperatorInput>;
+  categories?: InputMaybe<GraphCms_BlogCategoriesQueryOperatorInput>;
+  scheduledIn?: InputMaybe<GraphCms_ScheduledOperationFilterListInput>;
+  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+};
+
+export type GraphCms_BlogSortInput = {
+  fields?: InputMaybe<Array<InputMaybe<GraphCms_BlogFieldsEnum>>>;
+  order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
+};
+
 export type GraphCms_LinkConnection = {
   totalCount: Scalars['Int'];
   edges: Array<GraphCms_LinkEdge>;
@@ -9105,6 +10065,18 @@ export type AllAboutDetailsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllAboutDetailsQuery = { allGraphCmsSpeciality: { nodes: Array<{ id: string, title: string, description: { html: string }, icon: { id: string, url: string } }> }, allGraphCmsTechnology: { nodes: Array<{ id: string, title: string, description: { html: string }, icon: { id: string, url: string }, backgroundColor: { hex: any } }> } };
+
+export type AllBlogItemsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBlogItemsQuery = { allGraphCmsBlog: { nodes: Array<{ id: string, title: string, description: string, type: GraphCms_BlogType, categories: Array<GraphCms_BlogCategories>, blogPath?: string | null, headerImage: { id: string, url: string } }> } };
+
+export type BlogPostQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type BlogPostQuery = { graphCmsBlog?: { id: string, title: string, description: string, type: GraphCms_BlogType, categories: Array<GraphCms_BlogCategories>, publishedAt?: any | null, headerImage: { id: string, url: string }, content: { html: string } } | null };
 
 export type AllPortfolioItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
