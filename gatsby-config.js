@@ -48,7 +48,7 @@ module.exports = {
         // Your GraphCMS API endpoint. Available from your project settings.
         endpoint: process.env.GRAPHCMS_ENDPOINT,
         // A PAT (Permanent Auth Token) for your project. Required if your project is not available publicly, or you want to scope access to a specific content stage (i.e. draft content).
-        stages: ['PUBLISHED', process.env.NODE_ENV !== 'production' ? 'DRAFT' : ''],
+        stages: ['DRAFT', 'PUBLISHED'].filter(stage => process.env.NODE_ENV !== 'production' || stage === 'PUBLISHED'),
       },
     },
   ],
