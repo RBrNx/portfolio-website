@@ -86,6 +86,7 @@ const BlogPost = ({ data, location }: PageProps<BlogPostQuery, null, NavigationS
   return (
     <CardModal
       show={modalVisible}
+      fullscreen
       onClose={onModalClose}
       onFlipFinish={onFlipFinish}
       cardFront={CardFrontComponent}

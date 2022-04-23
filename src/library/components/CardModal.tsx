@@ -11,6 +11,7 @@ interface ModalProps {
   onClose: React.MouseEventHandler;
   onFlipFinish: Function;
   show: boolean;
+  fullscreen?: boolean;
   cardFront?: () => JSX.Element;
   cardBack: () => JSX.Element;
   style: React.CSSProperties;
@@ -19,9 +20,18 @@ interface ModalProps {
 interface ModalOverlayProps {
   show?: boolean;
   isFlipped?: boolean;
+  fullscreen?: boolean;
 }
 
-const CardModal = ({ onClose, onFlipFinish, show, cardFront: CardFront, cardBack: CardBack, style }: ModalProps) => {
+const CardModal = ({
+  onClose,
+  onFlipFinish,
+  show,
+  fullscreen,
+  cardFront: CardFront,
+  cardBack: CardBack,
+  style,
+}: ModalProps) => {
   const flipperRef = useRef<HTMLDivElement>(null);
   const [isFlipped, setIsFlipped] = useState(false);
   const { lockScroll, unlockScroll } = useScrollLock();
@@ -48,7 +58,7 @@ const CardModal = ({ onClose, onFlipFinish, show, cardFront: CardFront, cardBack
   return (
     <>
       <ModalOverlay show={show} onClick={onClose} />
-      <ModalContainer isFlipped={isFlipped} style={style}>
+      <ModalContainer isFlipped={isFlipped} fullscreen={fullscreen} style={style}>
         <Flipper ref={flipperRef} show={show} isFlipped={isFlipped} onTransitionEnd={handleTransformTransitionEnd}>
           <CardFrontContainer>{CardFront && <CardFront />}</CardFrontContainer>
           <CardBackContainer>
@@ -101,6 +111,18 @@ const ModalContainer = styled.div<ModalOverlayProps>`
         left: 50vw !important;
         top: 50vh !important;
         transform: translate(-50%, -50%) !important;
+      }
+    `}
+  ${props =>
+    props.isFlipped &&
+    props.fullscreen &&
+    css`
+      ${up('md')} {
+        height: 100% !important;
+        width: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: translate(0) !important;
       }
     `}
 `;
