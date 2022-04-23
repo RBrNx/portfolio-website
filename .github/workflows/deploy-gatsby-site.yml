@@ -17,8 +17,8 @@ jobs:
           node-version: 14
       - name: Build
         run: |
-          npm ci
-          npm run build
+          yarn install --immutable
+          yarn build
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
