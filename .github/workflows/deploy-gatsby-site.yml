@@ -19,6 +19,8 @@ jobs:
         run: |
           yarn install --immutable
           yarn build
+        env:
+          GRAPHCMS_ENDPOINT: ${{ secrets.GRAPHCMS_ENDPOINT }}
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
