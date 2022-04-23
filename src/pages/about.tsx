@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { graphql, PageProps } from 'gatsby';
 import DefaultLayout from '../layouts/Default';
-import PortfolioTitle from '../features/portfolio/Title';
-import PortfolioSubtitle from '../features/portfolio/Subtitle';
+import AboutTitle from '../features/about/Title';
+import AboutSubtitle from '../features/about/Subtitle';
 import Section from '../library/components/Section';
 import SpecialityCard from '../features/about/SpecialityCard';
 import { AllAboutDetailsQuery } from '../../graphql-types';
@@ -27,7 +27,7 @@ const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
   }, []);
 
   return (
-    <DefaultLayout heroImage={headerImages[imageIndex]} heroTitle={PortfolioTitle} heroSubtitle={PortfolioSubtitle}>
+    <DefaultLayout heroImage={headerImages[imageIndex]} heroTitle={AboutTitle} heroSubtitle={AboutSubtitle}>
       <Section title='My Specialities' subtitle='Here are the skills that I can bring to a work environment.'>
         <GridContainer>
           {specialities?.map(speciality => (
