@@ -1,5 +1,6 @@
 import { lighten } from 'polished';
 import React, { useCallback } from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 import ProfilePicture from '../../images/ConorWatson.png';
 import HeroHeader from '../../library/components/HeroHeader';
@@ -80,6 +81,14 @@ const TitleContainer = styled.div`
   h2 {
     font-size: 42px;
     margin: 0;
+
+    ${up('md')} {
+      font-size: 52px;
+    }
+
+    ${up('xxl')} {
+      font-size: 68px;
+    }
   }
 `;
 
@@ -89,11 +98,20 @@ const SubtitleContainer = styled.div`
   font-style: italic;
   position: relative;
   text-align: center;
+
+  ${up('md')} {
+    font-size: 24px;
+  }
 `;
 
 const ArticleContainer = styled.div`
   padding-left: 25px;
   padding-right: 25px;
+
+  ${up('xxl')} {
+    padding-left: 250px;
+    padding-right: 250px;
+  }
 `;
 
 const MetadataContainer = styled.div`
@@ -103,6 +121,10 @@ const MetadataContainer = styled.div`
   padding: 20px;
   border-radius: 5px;
   margin-top: 15px;
+
+  ${up('md')} {
+    flex-direction: row;
+  }
 `;
 
 const BlogMetadata = styled.div`

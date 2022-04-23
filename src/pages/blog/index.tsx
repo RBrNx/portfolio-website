@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, navigate, PageProps } from 'gatsby';
+import { up } from 'styled-breakpoints';
 import DefaultLayout from '../../layouts/Default';
 import BlogHeaderImage from '../../images/hero/blog-header.jpg';
 import BlogTitle from '../../features/blog/Title';
@@ -59,6 +60,21 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 30px;
   padding-bottom: 50px;
+
+  ${up('md')} {
+    padding: 0 45px;
+    grid-template-columns: repeat(2, 2fr);
+  }
+
+  ${up('lg')} {
+    padding: 0 100px;
+    grid-template-columns: repeat(3, 2fr);
+  }
+
+  ${up('xxl')} {
+    padding: 0 175px;
+    grid-template-columns: repeat(3, 2fr);
+  }
 `;
 
 export const query = graphql`

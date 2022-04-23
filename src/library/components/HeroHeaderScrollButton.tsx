@@ -1,5 +1,6 @@
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import React, { useState } from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 
 interface ButtonContainerProps {
@@ -38,6 +39,10 @@ const ButtonContainer = styled.div.attrs<ButtonContainerProps>(props => ({
   height: 60px;
   bottom: 5%;
   cursor: pointer;
+
+  ${up('xxl')} {
+    bottom: 10%;
+  }
 `;
 
 const Chevron = styled.div`

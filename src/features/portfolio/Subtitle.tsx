@@ -1,4 +1,5 @@
 import React from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 import HighlightText from '../../library/components/HighlightText';
 
@@ -17,6 +18,10 @@ const Subtitle = () => (
 
 const SubtitleContainer = styled.div`
   font-size: 20px;
+
+  ${up('md')} {
+    font-size: 24px;
+  }
 `;
 
 const SentenceContainer = styled.div`
@@ -24,6 +29,10 @@ const SentenceContainer = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 100px;
+
+  ${up('xxl')} {
+    margin-bottom: 0px;
+  }
 
   span {
     display: block;

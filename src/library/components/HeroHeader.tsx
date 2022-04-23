@@ -1,4 +1,5 @@
 import React from 'react';
+import { up } from 'styled-breakpoints';
 import styled, { CSSProp } from 'styled-components';
 import HeroHeaderScrollButton from './HeroHeaderScrollButton';
 
@@ -45,6 +46,7 @@ const BackgroundImage = styled.section<BackgroundImageProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   ${props => props.customCSS};
 
   &:before {
@@ -67,6 +69,14 @@ const TextContainer = styled.div`
   padding: 100px 15%;
   pointer-events: none;
   text-align: center;
+
+  ${up('md')} {
+    padding: 0 8%;
+  }
+
+  ${up('xxl')} {
+    padding: 0 20%;
+  }
 `;
 
 export default HeroHeader;

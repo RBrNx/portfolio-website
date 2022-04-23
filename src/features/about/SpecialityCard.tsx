@@ -51,6 +51,7 @@ const Title = styled.div`
   color: ${props => props.theme.heading};
   margin-bottom: 40px;
   position: relative;
+  text-align: center;
 
   &:after {
     content: '';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 
 const Title = () => (
@@ -12,6 +13,11 @@ const TitleContainer = styled.div`
     font-size: 60px;
     margin: 0;
     text-transform: uppercase;
+
+    ${up('md')} {
+      font-size: 68px;
+      margin-bottom: 100px;
+    }
   }
 `;
 

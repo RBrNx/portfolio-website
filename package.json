@@ -55,6 +55,7 @@
     "react-image-lightbox": "^5.1.4",
     "react-share": "^4.4.0",
     "react-tsparticles": "^1.39.2",
+    "styled-breakpoints": "^11.0.5",
     "styled-components": "^5.3.3",
     "swiper": "^7.4.1",
     "tsparticles": "^1.39.2",

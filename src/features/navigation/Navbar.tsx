@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { rgba } from 'polished';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { up } from 'styled-breakpoints';
 import { useScrollLock } from '../../library/context/ScrollLock';
 
 interface NavProps {
@@ -88,6 +89,10 @@ const NavLink = styled(Link)`
   &:hover,
   &.active {
     color: ${props => props.theme.accent};
+  }
+
+  ${up('xxl')} {
+    padding: 20px 30px;
   }
 `;
 

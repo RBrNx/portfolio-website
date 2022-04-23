@@ -1,4 +1,5 @@
 import React from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 
 interface SectionProps {
@@ -26,6 +27,18 @@ const SectionTitle = styled.h2`
   position: relative;
   display: inline-block;
 
+  ${up('md')} {
+    padding: 35px 0 0 40px;
+  }
+
+  ${up('lg')} {
+    padding: 50px 0 0 100px;
+  }
+
+  ${up('xxl')} {
+    padding: 75px 0 0 175px;
+  }
+
   &:after {
     content: ' ';
     position: absolute;
@@ -34,6 +47,21 @@ const SectionTitle = styled.h2`
     height: 1px;
     width: calc(100% - 25px);
     background: ${props => props.theme.heading};
+
+    ${up('md')} {
+      left: 45px;
+      width: calc(100% - 45px);
+    }
+
+    ${up('lg')} {
+      left: 100px;
+      width: calc(100% - 100px);
+    }
+
+    ${up('xxl')} {
+      left: 175px;
+      width: calc(100% - 175px);
+    }
   }
 `;
 
@@ -44,6 +72,18 @@ const SectionSubtitle = styled.p`
   font-family: 'Roboto', sans-serif;
   color: ${props => props.theme.body};
   margin-bottom: 20px;
+
+  ${up('md')} {
+    padding: 0 45px;
+  }
+
+  ${up('lg')} {
+    padding: 0 100px;
+  }
+
+  ${up('xxl')} {
+    padding: 0 175px;
+  }
 `;
 
 export default Section;

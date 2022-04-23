@@ -1,4 +1,5 @@
 import React from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 import HighlightText from '../../library/components/HighlightText';
 
@@ -19,6 +20,20 @@ const TitleContainer = styled.div`
   h2 {
     font-size: 42px;
     margin: 0;
+  }
+
+  ${up('md')} {
+    margin-bottom: 150px;
+
+    h2 {
+      font-size: 52px;
+    }
+  }
+
+  ${up('xxl')} {
+    h2 {
+      font-size: 68px;
+    }
   }
 `;
 

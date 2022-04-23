@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { graphql, PageProps } from 'gatsby';
+import { up } from 'styled-breakpoints';
 import DefaultLayout from '../layouts/Default';
 import AboutTitle from '../features/about/Title';
 import AboutSubtitle from '../features/about/Subtitle';
@@ -29,7 +30,7 @@ const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
   return (
     <DefaultLayout heroImage={headerImages[imageIndex]} heroTitle={AboutTitle} heroSubtitle={AboutSubtitle}>
       <Section title='My Specialities' subtitle='Here are the skills that I can bring to a work environment.'>
-        <GridContainer>
+        <SpecialityGridContainer>
           {specialities?.map(speciality => (
             <SpecialityCard
               key={speciality.id}
@@ -38,13 +39,13 @@ const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
               icon={speciality.icon}
             />
           ))}
-        </GridContainer>
+        </SpecialityGridContainer>
       </Section>
       <Section
         title='Tools and Technologies'
         subtitle='A guide to the tools and technologies that I have experience with.'
       >
-        <GridContainer>
+        <TechnologyGridContainer>
           {technologies?.map(technology => (
             <TechnologyCard
               key={technology.id}
@@ -54,19 +55,53 @@ const AboutPage = ({ data }: PageProps<AllAboutDetailsQuery>) => {
               backgroundColor={technology.backgroundColor.hex}
             />
           ))}
-        </GridContainer>
+        </TechnologyGridContainer>
       </Section>
     </DefaultLayout>
   );
 };
 
-const GridContainer = styled.div`
+const SpecialityGridContainer = styled.div`
   padding: 0 25px;
   position: relative;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 30px;
   padding-bottom: 50px;
+
+  ${up('md')} {
+    padding: 0 45px;
+    grid-template-columns: repeat(2, 2fr);
+  }
+
+  ${up('lg')} {
+    padding: 0 100px;
+    grid-template-columns: repeat(3, 2fr);
+  }
+
+  ${up('xxl')} {
+    padding: 0 175px;
+    grid-template-columns: repeat(3, 2fr);
+  }
+`;
+
+const TechnologyGridContainer = styled(SpecialityGridContainer)`
+  grid-gap: 0px;
+
+  ${up('md')} {
+    padding: 0 45px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ${up('lg')} {
+    padding: 0 75px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  ${up('xxl')} {
+    padding: 0 100px;
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const query = graphql`

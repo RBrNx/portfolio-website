@@ -1,5 +1,6 @@
 import { lighten } from 'polished';
 import React from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 import SVGIcon from '../../library/components/SVGIcon';
 
@@ -88,6 +89,14 @@ const Title = styled.div`
   transform-style: preserve-3d;
   transform: translateZ(80px);
   padding-bottom: 20px;
+
+  ${up('md')} {
+    font-size: 36px;
+  }
+
+  ${up('xxl')} {
+    font-size: 28px;
+  }
 `;
 
 const Description = styled.div`
@@ -96,6 +105,14 @@ const Description = styled.div`
   width: 100%;
   transform-style: preserve-3d;
   transform: translateZ(75px);
+
+  ${up('md')} {
+    font-size: 24px;
+  }
+
+  ${up('xxl')} {
+    font-size: 18px;
+  }
 `;
 
 export default TechnologyCard;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 
 const Subtitle = () => (
@@ -9,6 +10,10 @@ const Subtitle = () => (
 
 const SubtitleContainer = styled.div`
   font-size: 20px;
+
+  ${up('md')} {
+    font-size: 24px;
+  }
 `;
 
 export default Subtitle;

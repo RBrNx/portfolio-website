@@ -2,6 +2,7 @@
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { lighten } from 'polished';
 import React, { TransitionEvent, useEffect, useState, useRef } from 'react';
+import { up } from 'styled-breakpoints';
 import styled, { css } from 'styled-components';
 import { useScrollLock } from '../context/ScrollLock';
 import CloseButton from './CloseButton';
@@ -85,6 +86,22 @@ const ModalContainer = styled.div<ModalOverlayProps>`
       left: 0 !important;
       top: 0 !important;
       transform: translate(0) !important;
+
+      ${up('md')} {
+        height: 90% !important;
+        width: 80% !important;
+        left: 50vw !important;
+        top: 50vh !important;
+        transform: translate(-50%, -50%) !important;
+      }
+
+      ${up('xxl')} {
+        height: 80% !important;
+        width: 50% !important;
+        left: 50vw !important;
+        top: 50vh !important;
+        transform: translate(-50%, -50%) !important;
+      }
     `}
 `;
 
