@@ -64,16 +64,19 @@ const GridContainer = styled.div`
   ${up('md')} {
     padding: 0 45px;
     grid-template-columns: repeat(2, 2fr);
+    padding-bottom: 50px;
   }
 
   ${up('lg')} {
     padding: 0 100px;
     grid-template-columns: repeat(3, 2fr);
+    padding-bottom: 50px;
   }
 
   ${up('xxl')} {
     padding: 0 175px;
     grid-template-columns: repeat(3, 2fr);
+    padding-bottom: 50px;
   }
 `;
 
