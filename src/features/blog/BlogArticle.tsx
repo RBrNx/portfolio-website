@@ -23,6 +23,7 @@ const calculateReadingTime = (content: string) => {
 
 const BlogArticle = ({ title, description, headerImageUrl, content, publishedAt }: BlogArticleProps) => {
   const readingTime = calculateReadingTime(content);
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const blogTitle = useCallback(
     () => (
@@ -56,12 +57,7 @@ const BlogArticle = ({ title, description, headerImageUrl, content, publishedAt 
               </span>
             </AuthorInfo>
           </BlogMetadata>
-          <SocialShare
-            url={window && window.location.href}
-            title={title}
-            description={description}
-            headerImageUrl={headerImageUrl}
-          />
+          <SocialShare url={shareUrl} title={title} description={description} headerImageUrl={headerImageUrl} />
         </MetadataContainer>
         <BlogContent dangerouslySetInnerHTML={{ __html: content }} />
       </ArticleContainer>
