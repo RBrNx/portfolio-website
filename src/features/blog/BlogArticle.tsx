@@ -57,7 +57,7 @@ const BlogArticle = ({ title, description, headerImageUrl, content, publishedAt 
             </AuthorInfo>
           </BlogMetadata>
           <SocialShare
-            url={window.location.href}
+            url={window && window.location.href}
             title={title}
             description={description}
             headerImageUrl={headerImageUrl}
