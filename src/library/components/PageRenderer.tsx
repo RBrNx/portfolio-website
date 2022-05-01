@@ -19,10 +19,10 @@ interface PageRendererProps {
 const PageRenderer = ({ match }: PageRendererProps) => {
   switch (match.route.path) {
     case '/portfolio/:slug/':
-      return <PortfolioPage data={PortfolioPageJSON.result.data} />;
+      return <PortfolioPage data={PortfolioPageJSON?.result?.data} />;
 
     case '/blog/:slug/':
-      return <BlogPage data={BlogPageJSON.result.data} />;
+      return <BlogPage data={BlogPageJSON?.result?.data} />;
 
     default:
       return null;
