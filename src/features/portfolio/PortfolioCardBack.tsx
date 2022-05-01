@@ -119,6 +119,7 @@ const CarouselContainer = styled.div`
 const CarouselImage = styled.img`
   max-height: 300px;
   max-width: 100%;
+  cursor: zoom-in;
 `;
 
 const DescriptionContainer = styled.div`
