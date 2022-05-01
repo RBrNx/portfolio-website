@@ -8,6 +8,7 @@
 import React from 'react';
 import ChildRouter from './ChildRouter';
 
-const wrapPageElement = ({ props }, { routes }) => React.createElement(ChildRouter, { ...props, routes });
+const wrapPageElement = ({ props, element }, { routes }) =>
+  React.createElement(ChildRouter, { ...props, element, routes });
 
 export { wrapPageElement };
