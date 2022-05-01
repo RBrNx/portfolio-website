@@ -11,5 +11,5 @@
     "noUnusedLocals": false,
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "public", ".cache"]
+  "exclude": ["node_modules", "gatsby-frontend/public", "gatsby-frontend/.cache"]
 }
