@@ -1,0 +1,18 @@
+service: redbarongames-workflow-trigger
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: '3'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-2
+
+functions:
+  deploy_trigger:
+    handler: handler.trigger
+    url: true
+    environment:
+      GITHUB_TOKEN: ${env:GITHUB_TOKEN}
