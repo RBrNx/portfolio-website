@@ -80,7 +80,7 @@ const GridContainer = styled.div`
 
 export const query = graphql`
   query AllPortfolioItems {
-    allGraphCmsPortfolioItem {
+    allGraphCmsPortfolioItem(sort: { order: DESC, fields: createdAt }) {
       nodes {
         id
         title
