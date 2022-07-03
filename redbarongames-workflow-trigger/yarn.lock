@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@graphcms/utils@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@graphcms/utils/-/utils-1.1.0.tgz#b4d63fd70a393e18561d9d868b9919833ff2bcdb"
+  integrity sha512-hv2zOhCQUvePSfKoQTzyKKqvjA3f2d/ZDUHPQAKz6SUAEyAmIU5d9z4f/YjjeJ/nGCxpoL5jlB3OAYl6Xd1sqQ==
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
