@@ -46,3 +46,4 @@ jobs:
         with:
           dest-s3-bucket: 'redbarongames.co.uk'
           cloudfront-id-to-invalidate: E2XQEMGZXIZWEW
+          public-source-path: ./gatsby-frontend/public/ 
