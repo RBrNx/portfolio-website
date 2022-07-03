@@ -8,7 +8,7 @@ module.exports.trigger = async (event) => {
   const { body, headers } = event;
   const signature = headers['gcms-signature'];
 
-  const isValidRequest = verifyWebhookSignature({ body, signature, secret: SECRET_KEY });
+  const isValidRequest = verifyWebhookSignature({ rawPayload: body, signature, secret: SECRET_KEY });
 
   if(!isValidRequest) {
     return {
