@@ -2,19 +2,21 @@
 
 const axios = require('axios')
 const { verifyWebhookSignature } = require('@graphcms/utils');
+const { response } = require('./helpers.js')
 
 module.exports.trigger = async (event) => {
   const { SECRET_KEY } = process.env;
   const { body, headers } = event;
   const signature = headers['gcms-signature'];
 
+  if(!body || !signature){
+    return response(401, 'Unauthorized - Invalid Request')
+  }
+
   const isValidRequest = verifyWebhookSignature({ rawPayload: body, signature, secret: SECRET_KEY });
 
   if(!isValidRequest) {
-    return {
-      statusCode: 401,
-      body: 'Unauthorized - Invalid Request'
-    }
+    return response(401, 'Unauthorized - Invalid Request')
   }
 
   const { status } = await axios.post(
@@ -29,13 +31,8 @@ module.exports.trigger = async (event) => {
   )
 
   if (status === 204) {
-    return {
-      statusCode: 200,
-      body: 'GitHub API called'
-    }
+    return response(200, 'GitHub API called')
   }
 
-  return {
-    statusCode: 400
-  }
+  return response(400)
 }
