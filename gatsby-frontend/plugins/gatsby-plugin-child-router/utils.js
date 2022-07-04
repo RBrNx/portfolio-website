@@ -9,8 +9,6 @@ const buildPageElement = (match, prevProps, props) => {
   const { component, page } = pageElementProps.pageResources || {};
   const { element: fallbackComponent } = props;
 
-  console.log({ usePageRenderer, match, prevProps, props });
-
   if (usePageRenderer) {
     return React.createElement(PageRenderer, { match, key: match.route.path });
   }
