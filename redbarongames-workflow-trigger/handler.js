@@ -4,10 +4,18 @@ const axios = require('axios')
 const { verifyWebhookSignature } = require('@graphcms/utils');
 const { response } = require('./helpers.js')
 
+let lastExecuted = null;
+
 module.exports.trigger = async (event) => {
   const { SECRET_KEY } = process.env;
   const { body, headers } = event;
   const signature = headers['gcms-signature'];
+
+  const validExecutionTime = new Date();
+  validExecutionTime.setMinutes(validExecutionTime.getMinutes() - 1);
+  if(lastExecuted && lastExecuted > validExecutionTime) {
+    return response(200, 'Already processing request')
+  }
 
   if(!body || !signature){
     return response(401, 'Unauthorized - Invalid Request')
@@ -31,6 +39,7 @@ module.exports.trigger = async (event) => {
   )
 
   if (status === 204) {
+    lastExecuted = new Date();
     return response(200, 'GitHub API called')
   }
 
