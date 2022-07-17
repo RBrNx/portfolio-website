@@ -20,7 +20,7 @@ module.exports = {
       },
     },
     {
-      resolve: require.resolve(`./plugins/gatsby-plugin-child-router`),
+      resolve: 'gatsby-plugin-static-page-modal',
       options: {
         pageRendererPath: `${__dirname}/src/library/components/PageRenderer.tsx`,
         routes: ['/portfolio/:slug/', '/blog/:slug/'],
