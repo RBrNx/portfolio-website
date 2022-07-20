@@ -23,12 +23,8 @@ jobs:
           node-version: 14
       - name: Initialise Page-Data
         run: |
-          mkdir -p public/page-data/portfolio/
-          touch public/page-data/portfolio/page-data.json
-          echo {} >> public/page-data/portfolio/page-data.json
-          mkdir -p public/page-data/blog/
-          touch public/page-data/blog/page-data.json
-          echo {} >> public/page-data/blog/page-data.json
+          chmod +x "${GITHUB_WORKSPACE}/initialisePageData.sh"
+          "${GITHUB_WORKSPACE}/initialisePageData.sh"
       - name: Build
         run: |
           yarn install --immutable
