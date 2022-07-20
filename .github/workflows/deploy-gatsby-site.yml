@@ -23,8 +23,8 @@ jobs:
           node-version: 14
       - name: Initialise Page-Data
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/initialisePageData.sh"
-          "${GITHUB_WORKSPACE}/initialisePageData.sh"
+          chmod +x ./initialisePageData.sh
+          ./initialisePageData.sh
       - name: Build
         run: |
           yarn install --immutable
