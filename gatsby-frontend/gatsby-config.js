@@ -1,7 +1,9 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://www.yourdomain.tld',
-    title: 'portfolio-website',
+    siteUrl: 'https://www.redbarongames.co.uk/',
+    title: 'Developer Portfolio for Conor Watson',
+    description: 'Developer Portfolio built with React, Gatsby and GraphQL',
+    image: `/favicon.png`,
   },
   plugins: [
     'gatsby-plugin-styled-components',

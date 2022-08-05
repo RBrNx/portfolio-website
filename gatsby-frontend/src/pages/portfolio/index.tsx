@@ -9,6 +9,7 @@ import PortfolioSubtitle from '../../features/portfolio/Subtitle';
 import Section from '../../library/components/Section';
 import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
 import { AllPortfolioItemsQuery, GraphCms_PortfolioItem } from '../../../graphql-types';
+import SEO from '../../library/components/SEO';
 
 interface PortfolioItem extends GraphCms_PortfolioItem {
   portfolioPath: string;
@@ -94,5 +95,7 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = () => <SEO />;
 
 export default IndexPage;
