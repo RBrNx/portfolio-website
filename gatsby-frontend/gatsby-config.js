@@ -53,11 +53,5 @@ module.exports = {
         stages: ['DRAFT', 'PUBLISHED'].filter(stage => process.env.NODE_ENV !== 'production' || stage === 'PUBLISHED'),
       },
     },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        icon: 'src/images/favicon.png',
-      },
-    },
   ],
 };
