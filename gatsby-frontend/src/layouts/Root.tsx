@@ -27,8 +27,8 @@ const theme = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <ScrollLockProvider>
     <ThemeProvider theme={theme}>
-      {children}
       <GlobalStyles />
+      {children}
     </ThemeProvider>
   </ScrollLockProvider>
 );
