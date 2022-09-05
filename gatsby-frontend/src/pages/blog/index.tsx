@@ -9,6 +9,7 @@ import BlogSubtitle from '../../features/blog/Subtitle';
 import Section from '../../library/components/Section';
 import { AllBlogItemsQuery, GraphCms_Blog } from '../../../graphql-types';
 import BlogCard from '../../features/blog/BlogCard';
+import SEO from '../../library/components/SEO';
 
 interface BlogItem extends GraphCms_Blog {
   blogPath: string;
@@ -98,5 +99,7 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = () => <SEO />;
 
 export default IndexPage;

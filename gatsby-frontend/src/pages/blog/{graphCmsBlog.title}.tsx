@@ -5,6 +5,7 @@ import { wrapAnchors } from '../../library/utils/DOMParser';
 import { BlogPostQuery } from '../../../graphql-types';
 import BlogCard from '../../features/blog/BlogCard';
 import BlogArticle from '../../features/blog/BlogArticle';
+import SEO from '../../library/components/SEO';
 
 interface NavigationState {
   initialModalStyle: {
@@ -94,6 +95,12 @@ const BlogPost = ({ data, location }: PageProps<BlogPostQuery, null, NavigationS
       style={initialModalStyle}
     />
   );
+};
+
+export const Head = ({ data }: PageProps<BlogPostQuery, null, NavigationState>) => {
+  const { title = '', description = '' } = data.graphCmsBlog || {};
+
+  return <SEO title={title} description={description} />;
 };
 
 export default BlogPost;

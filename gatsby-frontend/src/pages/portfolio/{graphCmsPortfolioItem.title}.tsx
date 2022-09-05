@@ -6,6 +6,7 @@ import PortfolioCardFront from '../../features/portfolio/PortfolioCardFront';
 import PortfolioCardBack from '../../features/portfolio/PortfolioCardBack';
 import { wrapAnchors } from '../../library/utils/DOMParser';
 import { PortfolioItemQuery } from '../../../graphql-types';
+import SEO from '../../library/components/SEO';
 
 interface NavigationState {
   initialModalStyle: {
@@ -105,6 +106,12 @@ const PortfolioItem = ({ data, location }: PageProps<PortfolioItemQuery, null, N
       )}
     </>
   );
+};
+
+export const Head = ({ data }: PageProps<PortfolioItemQuery, null, NavigationState>) => {
+  const { title = '', description = '' } = data.graphCmsPortfolioItem || {};
+
+  return <SEO title={title} description={description} />;
 };
 
 export default PortfolioItem;

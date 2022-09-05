@@ -5,6 +5,7 @@ import CVTitle from '../features/cv/Title';
 import { CvAssetsQuery, GraphCms_Asset } from '../../graphql-types';
 import DefaultLayout from '../layouts/Default';
 import HeroChildren from '../features/cv/HeroChildren';
+import SEO from '../library/components/SEO';
 
 const CVPage = ({ data }: PageProps<CvAssetsQuery>) => {
   const { nodes: cvAssets } = data?.allGraphCmsAsset || {};
@@ -28,5 +29,7 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = () => <SEO />;
 
 export default CVPage;

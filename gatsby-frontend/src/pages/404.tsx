@@ -7,6 +7,7 @@ import Navbar from '../features/navigation/Navbar';
 import HeroHeader from '../library/components/HeroHeader';
 import Footer from '../library/components/Footer';
 import NotFoundImage from '../images/hero/404-header.jpeg';
+import SEO from '../library/components/SEO';
 
 const NotFoundPage = () => (
   <>
@@ -34,5 +35,7 @@ const ButtonContainer = styled.div`
 const StyledButton = styled(Button)`
   margin-bottom: 40px;
 `;
+
+export const Head = () => <SEO />;
 
 export default NotFoundPage;

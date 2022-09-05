@@ -13,6 +13,7 @@ import ClydeArcImage from '../images/hero/clyde-arc.jpg';
 import DukeOfWellingtonImage from '../images/hero/duke-of-wellington.jpg';
 import GeorgeSquareImage from '../images/hero/george-square.jpg';
 import HydroImage from '../images/hero/hydro.jpg';
+import SEO from '../library/components/SEO';
 
 const headerImages = [ClydeArcImage, DukeOfWellingtonImage, GeorgeSquareImage, HydroImage];
 
@@ -137,5 +138,7 @@ export const query = graphql`
     }
   }
 `;
+
+export const Head = () => <SEO />;
 
 export default AboutPage;
