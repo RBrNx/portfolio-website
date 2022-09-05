@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { navigate } from 'gatsby';
+import SEO from '../library/components/SEO';
 
 export default () => {
   useEffect(() => {
@@ -7,3 +8,5 @@ export default () => {
   }, []);
   return null;
 };
+
+export const Head = () => <SEO />;
