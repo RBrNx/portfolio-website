@@ -7077,10 +7077,10 @@ gatsby-plugin-sharp@^4.17.0:
     sharp "^0.30.3"
     svgo "1.3.2"
 
-gatsby-plugin-static-page-modal@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-static-page-modal/-/gatsby-plugin-static-page-modal-1.0.3.tgz#8990576112d0f62534ae585145a571a9759cf211"
-  integrity sha512-FjIJSjtYT6m02PSbNmqZZImyvIKuYY4UJjAxYKVTr3mhv6qlAAbkNWP+UoHjf3deaszaS1VYmnwj0KQHerykWg==
+gatsby-plugin-static-page-modal@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-static-page-modal/-/gatsby-plugin-static-page-modal-1.0.4.tgz#68c3cd84c4d0fe5d5ebdd5ffac30d7cf94f9a8ca"
+  integrity sha512-Ke/HpTSm0PPCDmbjntVplUpPo3U348p26jgFgNr96bcA/a0xBLptGcyrjMT512zsZwscgSeP7vPIVzax5sH6Ow==
 
 gatsby-plugin-styled-components@^5.4.0:
   version "5.4.0"
