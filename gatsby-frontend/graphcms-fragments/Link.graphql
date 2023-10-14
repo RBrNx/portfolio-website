@@ -1,13 +1,12 @@
 fragment Link on Link {
   stage
-  remoteId: id
-  createdAt
-  updatedAt
   publishedAt
+  updatedAt
+  createdAt
+  remoteId: id
   title
   url
-  type
-  createdBy {
+  publishedBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
@@ -21,13 +20,14 @@ fragment Link on Link {
       stage
     }
   }
-  publishedBy {
+  createdBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
       stage
     }
   }
+  type
   scheduledIn {
     ... on ScheduledOperation {
       remoteTypeName: __typename

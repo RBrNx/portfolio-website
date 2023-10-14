@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "./initialisePageData.sh && gatsby develop",
+    "start": "./initialisePageData.sh && gatsby develop --verbose",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -44,7 +44,7 @@
     "gatsby-plugin-static-page-modal": "^1.0.4",
     "gatsby-plugin-styled-components": "^5.4.0",
     "gatsby-source-filesystem": "^4.4.0",
-    "gatsby-source-graphcms": "^2.7.0-next.1",
+    "gatsby-source-graphcms": "^2.8.0",
     "gatsby-transformer-sharp": "^4.17.0",
     "overlayscrollbars": "^1.13.1",
     "overlayscrollbars-react": "^0.2.3",
@@ -68,7 +68,6 @@
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "eslint": "^8.5.0",
-    "eslint-loader": "^4.0.2",
     "eslint-webpack-plugin": "^3.1.1",
     "gatsby-plugin-eslint": "^4.0.2",
     "prettier": "^2.7.1"

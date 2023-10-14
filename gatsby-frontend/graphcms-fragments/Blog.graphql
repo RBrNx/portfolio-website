@@ -1,9 +1,9 @@
 fragment Blog on Blog {
   stage
-  remoteId: id
-  createdAt
-  updatedAt
   publishedAt
+  updatedAt
+  createdAt
+  remoteId: id
   title
   description
   content {
@@ -14,7 +14,7 @@ fragment Blog on Blog {
       text
     }
   }
-  createdBy {
+  publishedBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
@@ -28,7 +28,7 @@ fragment Blog on Blog {
       stage
     }
   }
-  publishedBy {
+  createdBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id

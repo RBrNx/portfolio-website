@@ -1,17 +1,17 @@
 fragment Asset on Asset {
   stage
   locale
-  remoteId: id
-  createdAt(variation: COMBINED)
-  updatedAt(variation: COMBINED)
-  publishedAt(variation: COMBINED)
-  handle
-  fileName
-  height
-  width
-  size
   mimeType
-  createdBy {
+  size
+  width
+  height
+  fileName
+  handle
+  publishedAt(variation: COMBINED)
+  updatedAt(variation: COMBINED)
+  createdAt(variation: COMBINED)
+  remoteId: id
+  publishedBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
@@ -25,7 +25,7 @@ fragment Asset on Asset {
       stage
     }
   }
-  publishedBy {
+  createdBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
@@ -34,6 +34,27 @@ fragment Asset on Asset {
   }
   carouselImagesPortfolioItem {
     ... on PortfolioItem {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  iconSpeciality {
+    ... on Speciality {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  iconTechnology {
+    ... on Technology {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  headerImageBlog {
+    ... on Blog {
       remoteTypeName: __typename
       remoteId: id
       stage

@@ -1,9 +1,9 @@
 fragment Speciality on Speciality {
   stage
-  remoteId: id
-  createdAt
-  updatedAt
   publishedAt
+  updatedAt
+  createdAt
+  remoteId: id
   title
   description {
     ... on RichText {
@@ -13,7 +13,7 @@ fragment Speciality on Speciality {
       text
     }
   }
-  createdBy {
+  publishedBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
@@ -27,7 +27,7 @@ fragment Speciality on Speciality {
       stage
     }
   }
-  publishedBy {
+  createdBy {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
